@@ -9,5 +9,9 @@ urlpatterns = [
    path('cards',views.index, name="cards"),
    path('login',views.loginPage, name="login"),
    path('addPC',views.addProjectCategory, name='addPC'),
-   path('addProject', views.addProject, name='addProject')
+   path('addProject', views.addProject, name='addProject'),
+   path('addCard', views.addCard, name="addCard"),
+   path('projects', views.projects,name="projects"),
+   path('projects/<int:id>',views.show_project, name="myproject_details"),
+   path('projects/<int:id>/add',views.addCard, name="addCard")
 ]

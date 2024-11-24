@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import ProjectCategory, Project
+from .models import ProjectCategory, Project, Card
 
 
 class ProjectCategoryForm(forms.ModelForm):
@@ -20,3 +20,12 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ('name', 'category')
+
+class CardForm(forms.ModelForm):
+    title=forms.CharField(required=True)
+    front=forms.CharField(required=True)
+    back=forms.CharField(required=True)
+
+    class Meta:
+        model=Card
+        fields=('title', 'front', 'back')
