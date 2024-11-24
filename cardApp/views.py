@@ -47,17 +47,22 @@ def logoutUser(request):
 def index(request):
     projectcategories =ProjectCategory.objects.all()
     # projects = Project.objects.all()
+    form1 = ProjectCategoryForm(request.POST)
+    form2 = ProjectForm(request.POST)
 
     projects= Project.objects.annotate(Count('card'))
-    # print(q)
-    # print(q[0].card__count)
-    # print(q[1].card__count)
-    # print(q[2].card__count)
-    # print(q[3].card__count)
+
+    for projectcategory in projectcategories:
+        projectcategory.projects = Project.objects.filter(category_id=projectcategory.id).annotate(Count('card'))
+
+    if request.method=='POST':
+        form_type = request.POST.get('form_type')
 
     context={
         'projectcategories': projectcategories,
         'projects': projects,
+        'form1':form1,
+        'form2':form2
 
     }
     return render(request, 'cards/index.html',context)
@@ -104,16 +109,37 @@ def projects(request):
     }
     return render(request, 'cards/projects.html', context)
 
+
 @login_required(login_url='login')
 def show_project(request, *, id):
+    
+
+    row_id = Project.objects.get(id=id)
+    row_id = row_id.id
+    print(row_id)
+    form = CardForm(request.POST)
+    if request.method == 'POST':
+        form = CardForm(request.POST, request.FILES)
+        if form.is_valid():
+            card = form.save(commit=False)
+            card.user = request.user 
+            card.project_id=row_id
+            form.save()
+            return redirect('/cards')
+    else:
+        form= CardForm()
+    
     project = Project.objects.get(id=id)
     cards = Card.objects.filter(project_id=id)
 
     context={
         'project':project,
-        'cards':cards
+        'cards':cards,
+        'form':form,
+        'row_id':row_id
     }
     return render(request, 'cards/show_project.html', context)
+
 
 @login_required(login_url='login')
 def addCard(request, *, id):
@@ -127,8 +153,9 @@ def addCard(request, *, id):
             card = form.save(commit=False)
             card.user = request.user 
             card.project_id=row_id
+           
             form.save()
-            return redirect('/cards')
+            return redirect('/projects/{row_id}'.format(row_id=row_id))
     else:
         form= CardForm()
     context={

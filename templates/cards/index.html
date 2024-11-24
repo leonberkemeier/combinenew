@@ -2,6 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        .container{
+            border: 1px solid black;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -12,22 +17,61 @@
     <br>
     <h3>{{user}}</h3>
 
-    {% for i in projectcategories %}
-    {{i.name}}
+    {% for projectcategory in projectcategories %}
+    {{projectcategory.id}}
+    {{projectcategory.name}}
+   
+    {{projectcategory.user}}
+    <br>    
+    {% for project in projectcategory.projects%}
+
+    <a href="projects/{{project.id}}">{{project.name}} <span>{{project.card__count}}</span></a>
     
-    {{i.user}}
+    
+    <br>
+    
+ 
+
+    {% endfor %}
+
     <br>
     {% endfor %}
 
-    <h1>------------</h1>
-    {% for i in projects %}
-    {{i.name}}
-    {{i.category}}
-    {{i.card__count}}
-    {{i.user}}
-    <br>
-    {% endfor %}
-    <a href="/addPC"><button>addpc</button></a>
-    <a href="/addProject"><button>addproject</button></a>
+
+    
+
+
+
+
+    <div class="container">
+        <h2> add PC</h2>
+        <div class="form-container">
+            <form action="{% url 'addPC'%}" method="POST">
+                {% csrf_token %}
+        
+                {{ form1 }}
+        
+                <input type="submit" name="addPC" value="addPC" id="">
+            </form>
+            <button><a href="{% url 'cards'%}">back</a></button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2> add Project</h2>
+        <div class="form-container">
+            <form action="{% url 'addProject'%}" method="POST">
+                {% csrf_token %}
+        
+                {{ form2 }}
+        
+                <input type="submit" name="addProject" value="addProject" id="">
+            </form>
+            <button><a href="{% url 'cards'%}">back</a></button>
+        </div>
+    </div>
+
+    <button>addpc</button>
+    <button>addproject</button>
 </body>
 </html>

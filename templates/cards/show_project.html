@@ -1,18 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        .container{
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <h1>show project</h1>
-    <h3>{{project.name}} <span>hi</span></h3>
+    <h3>{{project.name}} <span>hi</span> {{row_id}}</h3>
     <br>
     {%for i in cards%}
     {{i.title}}
     {{i.front}}
     {{i.back}}
+    <br>
     {%endfor%}
+
+    <div class="container">
+        <h2> add PC</h2>
+        <div class="form-container">
+            <form action="/addCard/{{row_id}}" method="POST">
+                {% csrf_token %}
+        
+                {{ form }}
+        
+                <input type="submit" name="addCard" value="addCard" id="">
+            </form>
+            <button><a href="projects/{{row_id}}">back</a></button>
+        </div>
+    </div>
 </body>
 </html>
