@@ -21,11 +21,11 @@
     {{projectcategory.id}}
     {{projectcategory.name}}
    
-    {{projectcategory.user}}
+    <!-- {{projectcategory.user}} -->
     <br>    
     {% for project in projectcategory.projects%}
 
-    <a href="projects/{{project.id}}">{{project.name}} <span>{{project.card__count}}</span></a>
+    <a href="projects/{{project.id}}">{{project.name}} <span></span> {{project.card__count}}</a>
     
     
     <br>

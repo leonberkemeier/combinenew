@@ -16,10 +16,10 @@
     <h1>show project</h1>
     <h3>{{project.name}} <span>hi</span> {{row_id}}</h3>
     <br>
-    {%for i in cards%}
-    {{i.title}}
-    {{i.front}}
-    {{i.back}}
+    {%for card in cards%}
+    {{card.title}}
+    {{card.front}}
+    {{card.back}}
     <br>
     {%endfor%}
 
@@ -33,7 +33,7 @@
         
                 <input type="submit" name="addCard" value="addCard" id="">
             </form>
-            <button><a href="projects/{{row_id}}">back</a></button>
+            <button><a href="/cards">back</a></button>
         </div>
     </div>
 </body>

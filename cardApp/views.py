@@ -45,7 +45,11 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def index(request):
-    projectcategories =ProjectCategory.objects.all()
+    
+    if request.user.is_superuser:
+        projectcategories=ProjectCategory.objects.all()
+    else:
+        projectcategories =ProjectCategory.objects.filter(user=request.user.id)
     # projects = Project.objects.all()
     form1 = ProjectCategoryForm(request.POST)
     form2 = ProjectForm(request.POST)
@@ -112,7 +116,26 @@ def projects(request):
 
 @login_required(login_url='login')
 def show_project(request, *, id):
+    project = Project.objects.get(id=id)
+    cards = Card.objects.filter(project_id=id)
     
+    # print(request.user)
+    # print(request.user.id)
+    # print(project.user)
+
+    if request.user.is_superuser:
+        project = Project.objects.get(id=id)
+        cards = Card.objects.filter(project_id=id)
+        print('hellosuperuser')
+    elif request.user.id == project.user:
+        project = Project.objects.get(id=id)
+        cards = Card.objects.filter(project_id=id)
+        print('hellouser')
+    else:
+        print('hellono')
+        return redirect('cards')
+
+
 
     row_id = Project.objects.get(id=id)
     row_id = row_id.id
@@ -129,8 +152,7 @@ def show_project(request, *, id):
     else:
         form= CardForm()
     
-    project = Project.objects.get(id=id)
-    cards = Card.objects.filter(project_id=id)
+    
 
     context={
         'project':project,
