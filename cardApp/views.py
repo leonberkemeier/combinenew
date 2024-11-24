@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Count
 
 from .models import ProjectCategory, Project, Card
 from .forms import ProjectCategoryForm, ProjectForm, CardForm
@@ -45,11 +46,19 @@ def logoutUser(request):
 @login_required(login_url='login')
 def index(request):
     projectcategories =ProjectCategory.objects.all()
-    projects = Project.objects.all()
+    # projects = Project.objects.all()
+
+    projects= Project.objects.annotate(Count('card'))
+    # print(q)
+    # print(q[0].card__count)
+    # print(q[1].card__count)
+    # print(q[2].card__count)
+    # print(q[3].card__count)
 
     context={
         'projectcategories': projectcategories,
-        'projects': projects
+        'projects': projects,
+
     }
     return render(request, 'cards/index.html',context)
 
@@ -86,7 +95,7 @@ def addProject(request):
     }
     return render(request, 'cards/addProject.html',context)
 
-
+@login_required(login_url='login')
 def projects(request):
     projects=Project.objects.filter(user=request.user)
     
@@ -95,6 +104,7 @@ def projects(request):
     }
     return render(request, 'cards/projects.html', context)
 
+@login_required(login_url='login')
 def show_project(request, *, id):
     project = Project.objects.get(id=id)
     cards = Card.objects.filter(project_id=id)
@@ -105,7 +115,7 @@ def show_project(request, *, id):
     }
     return render(request, 'cards/show_project.html', context)
 
-
+@login_required(login_url='login')
 def addCard(request, *, id):
     row_id = Project.objects.get(id=id)
     row_id = row_id.id

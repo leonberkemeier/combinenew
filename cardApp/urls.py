@@ -8,6 +8,7 @@ from django.conf import settings
 urlpatterns = [
    path('cards',views.index, name="cards"),
    path('login',views.loginPage, name="login"),
+   path('logout', views.logoutUser, name='logout'),
    path('addPC',views.addProjectCategory, name='addPC'),
    path('addProject', views.addProject, name='addProject'),
    path('addCard', views.addCard, name="addCard"),
