@@ -80,7 +80,9 @@ def addProjectCategory(request):
         form = ProjectCategoryForm(request.POST)
         if form.is_valid():
             project = form.save(commit=False)
-            project.user = request.user 
+            print(request.user)
+            print(request.user.id)
+            project.user = request.user.id
             form.save()
             return redirect('/cards')
     context={
@@ -96,7 +98,7 @@ def addProject(request):
         form = ProjectForm(request.POST)
         if form.is_valid():
             project = form.save(commit=False)
-            project.user = request.user 
+            project.user = request.user.id
             form.save()
             return redirect('/cards')
     context={
@@ -173,7 +175,7 @@ def addCard(request, *, id):
         form = CardForm(request.POST, request.FILES)
         if form.is_valid():
             card = form.save(commit=False)
-            card.user = request.user 
+            card.user = request.user.id
             card.project_id=row_id
            
             form.save()
