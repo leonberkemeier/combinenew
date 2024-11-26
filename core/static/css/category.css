@@ -1,0 +1,302 @@
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.project{
+    margin-left: 50px;
+    height: 5vh;
+    min-height: 200px;
+    min-width: 400px;
+    background: #646464c4;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;  
+    position: relative;
+    transition: background-color .3s ease;
+  
+}
+.project:hover{
+    cursor: pointer;
+    background-color: #929292d1;
+}
+.project .project-main{
+    height: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid rgb(82, 82, 82);
+    border-bottom: 1px solid rgb(82, 82, 82);
+    color: white;
+    padding: 5px;
+    /* position: relative; */
+}
+.project .project-main .info-container{
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    margin-left: 10px;
+    width: 80%;
+    text-transform: capitalize;
+}
+.project .project-main .main-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 1000;
+    width: 50px;
+    height: 100%;
+    
+}
+.project .project-main .forward-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    
+    width: 40px;
+    border-radius: 5px;
+    border: 1px solid rgb(82, 82, 82);
+}
+.project .project-main .forward-btn:hover{
+    cursor: pointer;
+}
+.project .project-main .main-icon ion-icon{
+    height: 40px;
+    width:40px;
+    background-color: rgba(193, 193, 193, 0.449);
+    border: 1px solid rgb(82, 82, 82);
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 5px;
+}
+.project .project-bottom{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgb(82, 82, 82);
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 0 20px 0 20px;
+    /* position: relative; */
+    transition: 0.3s ease;
+    color: white;
+}
+.project .project-bottom:hover{
+    height: 40%;
+    
+}
+.project .project-bottom ion-icon{
+    font-size: 30px;
+    color: white;
+}
+.project .delete-btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    /* border-radius: 50%; */
+    height: -50px;
+    width: -50px;
+    /* background: red; */
+    color: white;
+}
+.project .delete-btn:hover{
+    cursor: pointer;
+}
+
+
+.container .header{
+    /* background-color: green; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: white;
+}
+.container .body-main{
+    width: 100%;
+    height: calc(100% - 100px);
+}
+.category{
+    min-height: 400px;
+    max-height: calc(100vh - 200px);
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    /* background-color: orange; */
+    width: 100%;
+}
+.category .category-header{
+    background-color: rgba(177, 177, 177, 0.462);
+    /* background-color: red; */
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 20px 0 20px;
+}
+.category .category-main{
+    /* background-color: rgba(177, 177, 177, 0.281); */
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    /* background-color: blue; */
+    width: 100%;
+    height: calc(100% - 100px);
+    padding: 0  40px 0 40px;
+}
+
+
+.containerProject{
+    position: absolute;
+    left: -100%;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 600px;
+    height: 400px;
+    border-radius: 20px;
+    transition: left .3s ease;
+}
+.containerProject h2{
+    font-size: 30px;
+}
+.containerProject .heading{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+.containerProject .form-container{
+    height: calc(100% - 100px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  
+
+}
+/* .containerProject .form-container form ul{
+    display: none;
+} */
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+input[type=submit]:hover {
+background-color: #45a049;
+}
+
+.containerProject .form-container .pbackbutton{
+    background-color: rgb(255, 89, 89);
+    border: none;
+    position: absolute;
+    left: -10px;
+    bottom: -10px;  
+    border: 1px solid black;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 10px;
+
+}
+.containerProject .form-container .pbackbutton:hover{
+    cursor: pointer;
+}
+
+
+.containerProjectCategory{
+    position: absolute;
+    left: -100%;
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 600px;
+    height:300px;
+    border-radius: 20px;
+    transition: left .3s ease;
+}
+.containerProjectCategory h2{
+    font-size: 30px;
+}
+.containerProjectCategory .heading{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+.containerProjectCategory .form-container{
+    height: calc(100% - 100px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.containerProjectCategory .form-container .pcBackButton{
+    background-color: rgb(255, 89, 89);
+    border: none;
+    position: absolute;
+    left: -10px;
+    bottom: -10px;  
+    border: 1px solid black;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 30px;
+}
+.containerProjectCategory .form-container .pcBackButton:hover{
+    cursor: pointer;
+}

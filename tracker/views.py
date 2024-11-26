@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import ExpensesForm, PurposeForm, NetworthForm, FixedCostForm
 from django.contrib import messages
 from datetime import date,datetime
+import datetime as dt
 
 from .models import ExpensesItem, Purpose, Networth ,FixedCost
 
@@ -24,6 +25,9 @@ def tracker(request):
     
     if year is not None and month is not None:
         days = calendar.monthrange(int(year),int(month))[1]
+
+    current_time = dt.datetime.now()
+    current_day = current_time.day
 
     networth = Networth.objects.first()
     income = networth.incomeM
@@ -58,14 +62,23 @@ def tracker(request):
 
     average_networth_array = []
     for i in range(days):
-        rel_balance =round(rel_balance + avgincome - expenses_array[i],2)
-        average_networth_array.append(rel_balance)
+        if i <= current_day:
+            rel_balance =round(rel_balance + avgincome - expenses_array[i],2)
+            average_networth_array.append(rel_balance)
+        else:
+            rel_balance=rel_balance
+            average_networth_array.append(rel_balance)
     
+
     expenses_and_income_pd=[]
     for i in range(days):
-        difday = avgincome - expenses_array[i]
-        expenses_and_income_pd.append(difday)
-    
+        if i <= current_day:
+            difday = avgincome - expenses_array[i]
+            expenses_and_income_pd.append(difday)
+        else:
+            difday =0
+            expenses_and_income_pd.append(difday)
+        
     pl = purposeList(filter='purpose') 
     # print(pl)
     el = expenseList(expenses)
@@ -141,7 +154,7 @@ def list(request):
 
     for i in range(len(fixedCosts)):
         sumfixedcosts += fixedCosts[i].amount
-    
+    print(sumfixedcosts)
     # Array of days
     days_array=[]    
 
@@ -172,7 +185,9 @@ def list(request):
         expenses_array.append(float(seqs))
         sumExpenses+=int(seqs)
     
-    totalexpenses = sumExpenses 
+    totalexpenses = sumExpenses
+
+    sumcosts=sumfixedcosts+totalexpenses
 
     # print(expenses_array)
     # print(len(expenses_array))
@@ -184,6 +199,7 @@ def list(request):
     context = {
         'income':income,
         'totalexpenses':totalexpenses,
+        'sumcosts':sumcosts,
         'assets':assets,
         'balance':balance,
 
@@ -199,6 +215,7 @@ def list(request):
         'avgincome': avgincome,
         # 'expenses_and_income_pd':expenses_and_income_pd,
         'fixedCosts': fixedCosts,
+        'sumfixedcosts':sumfixedcosts,
         'pl':pl,
         'el':el
     }

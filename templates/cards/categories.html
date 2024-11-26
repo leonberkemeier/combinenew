@@ -1,0 +1,92 @@
+
+{% extends 'cards/indexup.html'%}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/category.css' %}">
+<div class="container">
+    <div class="header">
+        <h1>Cards</h1>
+        <button id="showProjectCard">addproject</button>
+        <button id="showPCCard">addCategory</button>
+    </div>
+    <div class="body-main">
+        {% for projectcategory in projectcategories %}
+        <div class="category">
+            <div class="category-header">
+                <h1>{{projectcategory.name}} <span>{{projectcategory.id}}</span></h1>
+
+                <ion-icon name="chevron-down-outline"></ion-icon>
+            </div>
+            <div class="category-main">
+                {% for project in projectcategory.projects%}
+                <div class="project">
+                    <div class="project-main">
+                        <div class="main-icon">
+                            <ion-icon name="folder-open-outline"></ion-icon>
+                        </div>
+                        
+                        <div class="info-container">
+                            <h1>{{project.name}}</h1>
+                            <h2><span>{{project.card__count}} </span> cards</h2>
+                        </div>
+                        <div class="forward-btn">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </div>
+                        
+                    </div>
+                    <div class="project-bottom">
+                        <h2>share</h2>
+                        <ion-icon name="people-circle-outline"></ion-icon>
+            
+                    </div>
+                    <div class="delete-btn">
+                        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+<div class="containerProjectCategory" id="addProjectCategory">
+    <div class="heading">
+        <h2>add a Category</h2>
+    </div>
+    <div class="form-container">
+        <form action="{% url 'addPC'%}" method="POST">
+            {% csrf_token %}
+    
+            {{ form1 }}
+    
+            <input type="submit" name="addPC" value="addPC" id="">
+        </form>
+        <button class="pcBackButton" id="hidePCCard">back</button>
+    </div>
+</div>
+
+<div class="containerProject" id="ProjectCard">
+    <div class="heading">
+        <h2>add a Project</h2>
+    </div>
+    <div class="form-container">
+        <form action="{% url 'addProject'%}" method="POST">
+            {% csrf_token %}
+    
+            {{ form2 }}
+    
+            <input type="submit" name="addProject" value="addProject" id="">
+        </form>
+        <button class="pbackbutton" id="hideProjectCard"><h2>back</h2></button>
+    </div>
+</div>
+
+<script defer src="{% static 'js/categories.js' %}"></script>
+{% endblock %}

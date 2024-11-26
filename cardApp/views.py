@@ -69,7 +69,7 @@ def index(request):
         'form2':form2
 
     }
-    return render(request, 'cards/index.html',context)
+    return render(request, 'cards/categories.html',context)
 
 
 @login_required(login_url='login')

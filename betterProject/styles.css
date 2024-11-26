@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: green;
+}
+.project{
+    height: 5vh;
+    min-height: 200px;
+    min-width: 400px;
+    background: #646464c4;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;  
+    position: absolute;
+    transition: background-color .3s ease;
+  
+}
+.project:hover{
+    cursor: pointer;
+    background-color: #929292d1;
+}
+.project .project-main{
+    height: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid rgb(82, 82, 82);
+    border-bottom: 1px solid rgb(82, 82, 82);
+    color: white;
+    padding: 5px;
+    /* position: relative; */
+}
+.project .project-main .info-container{
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    margin-left: 10px;
+    width: 80%;
+    text-transform: capitalize;
+}
+.project .project-main .main-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 1000;
+    width: 50px;
+    height: 100%;
+    
+}
+.project .project-main .forward-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    
+    width: 40px;
+    border-radius: 5px;
+    border: 1px solid rgb(82, 82, 82);
+}
+.project .project-main .forward-btn:hover{
+    cursor: pointer;
+}
+.project .project-main .main-icon ion-icon{
+    height: 40px;
+    width:40px;
+    background-color: rgba(193, 193, 193, 0.449);
+    border: 1px solid rgb(82, 82, 82);
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 5px;
+}
+.project .project-bottom{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgb(82, 82, 82);
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 0 20px 0 20px;
+    /* position: relative; */
+    transition: 0.3s ease;
+    color: white;
+}
+.project .project-bottom:hover{
+    height: 40%;
+    
+}
+.project .project-bottom ion-icon{
+    font-size: 30px;
+    color: white;
+}
+.project .delete-btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    /* border-radius: 50%; */
+    height: -50px;
+    width: -50px;
+    /* background: red; */
+    color: white;
+}
+.project .delete-btn:hover{
+    cursor: pointer;
+}

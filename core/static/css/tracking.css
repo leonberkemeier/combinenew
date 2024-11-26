@@ -73,7 +73,7 @@
     max-height: 2400px;
     min-height: 900px;
     min-width: 400px;
-    margin: 0 10px 10px 10px;
+    margin: 0 5px 10px 5px;
 }
 .body-main .container-bm-second .second-container{
     width: 100%;
@@ -90,7 +90,7 @@
     min-height: 400px;
     height:50%;
     border-radius: var(--border-radius);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     
 }
 .body-main .container-bm-second .second-container .networth_per_day_chart{
@@ -161,7 +161,7 @@
     min-height: 400px;
     height: 50%;
     border-radius: var(--border-radius);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .body-main .container-bm-third .third-container .PurposeList_container .PurposeList{
     background-color: var(--light-grey);
