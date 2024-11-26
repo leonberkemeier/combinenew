@@ -15,7 +15,9 @@
 }
 
 .project{
-    margin-left: 50px;
+    /* margin-top: 20px; */
+    margin-left: 20px;
+    margin-bottom: 20px;
     height: 5vh;
     min-height: 200px;
     min-width: 400px;
@@ -46,6 +48,7 @@
     color: white;
     padding: 5px;
     /* position: relative; */
+
 }
 .project .project-main .info-container{
     display: flex;
@@ -140,10 +143,9 @@
     height: calc(100% - 100px);
 }
 .category{
-    min-height: 400px;
-    max-height: calc(100vh - 200px);
-    height: 30%;
+    
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -164,13 +166,18 @@
 }
 .category .category-main{
     /* background-color: rgba(177, 177, 177, 0.281); */
+    min-height: 80px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: left;
     align-items: center;
     /* background-color: blue; */
     width: 100%;
+    max-width: 100%;
+    overflow-x: scroll;
     height: calc(100% - 100px);
     padding: 0  40px 0 40px;
+    padding: 20px 0 0 0 ;
 }
 
 

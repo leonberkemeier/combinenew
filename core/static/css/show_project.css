@@ -1,0 +1,155 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root{
+ --light-grey: rgb(38,38,38);
+ --medium-grey: rgb(23, 23,23);
+ --dark-grey: rgb(13,13,13);
+
+ --purple-light:rgb(114, 116, 214);
+ --purple-dark:rgb(88, 95, 164);
+
+ --sidebar-width: 200px;
+ --border-radius: 5px;
+ --header-height: 50px;
+ --border-radius: 10px;
+ --border-radius-s:5px;
+}
+
+.containerCardForm{
+    position: absolute;
+    left: -100%;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 600px;
+    height: 500px;
+    border-radius: 20px;
+    transition: left .3s ease;
+}
+.containerCardForm h2{
+    font-size: 30px;
+}
+
+.containerCardForm .heading{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.containerCardForm .form-container{
+    height: calc(100% - 100px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.containerCardForm .form-container form{
+    width: 80%;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+input[type=submit]:hover {
+background-color: #45a049;
+}
+.containerCardForm .form-container .pbackbutton{
+    background-color: rgb(255, 89, 89);
+    border: none;
+    position: absolute;
+    left: -10px;
+    bottom: -10px;  
+    border: 1px solid black;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 30px;
+}   
+.containerCardForm .form-container .pbackbutton:hover{
+    cursor: pointer;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+
+.container-header{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: green; */
+    color: white;
+    height: 100px;
+    width: 100%;
+}
+.container-main{
+    height: calc( 100% - 100px);
+}
+table{
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    border-spacing: 0;
+    width: 100%;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    background-color: var(--medium-grey);
+    border-collapse: collapse;
+}
+table th{
+    height: 40px;   
+    text-align: left;
+    padding: 8px;   
+    min-width: 90px;
+    background-color: var(--dark-grey);
+}
+table td{
+    
+    height: 30px;   
+    text-align: left;
+    padding: 8px;   
+    min-width: 90px
+}
+table td a{
+    color: var(--purple-dark);
+}
+table tr:nth-child(even){
+    background-color: var(--light-grey)
+}
+table tr:hover{
+    background-color: var(--dark-grey);
+}

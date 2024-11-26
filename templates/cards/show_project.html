@@ -1,40 +1,70 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <style>
-        .container{
-            border: 1px solid black;
-        }
-    </style>
-</head>
-<body>
-    <h1>show project</h1>
-    <h3>{{project.name}} <span>hi</span> {{row_id}}</h3>
-    <br>
-    {%for card in cards%}
-    {{card.title}}
-    {{card.front}}
-    {{card.back}}
-    <br>
-    {%endfor%}
 
-    <div class="container">
-        <h2> add PC</h2>
-        <div class="form-container">
-            <form action="/addCard/{{row_id}}" method="POST">
-                {% csrf_token %}
-        
-                {{ form }}
-        
-                <input type="submit" name="addCard" value="addCard" id="">
-            </form>
-            <button><a href="/cards">back</a></button>
-        </div>
+{% extends 'cards/indexup.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/show_project.css' %}">
+
+<div class="container">
+    <div class="container-header">
+        <button class="showAddCardFormButton" id="showAddCardFormButton">addCard</button>
+        <h1><span>project name: </span> {{project.name}}</h1>
+        <h1><span>project id: </span> {{row_id}}</h1>
     </div>
-</body>
-</html>
+    <div class="container-main">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Front</th>
+                    <th>back</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for card in cards %}
+                <tr>
+                    <td> {{card.id}}</td>
+                    <td> {{card.title}}</td>
+                    <td> {{card.front}}</td>
+                    <td> {{card.back}}</td>
+                    <td> <a href=""><ion-icon name="create-outline"></ion-icon></a></td>
+                    <td> <a href=""><ion-icon name="trash-outline"></ion-icon></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+
+       
+    </div>
+    
+    
+    
+</div>
+
+
+
+<div class="containerCardForm" id="AddCard">
+    <h2> add PC</h2>
+    <div class="form-container">
+        <form action="/addCard/{{row_id}}" method="POST">
+            {% csrf_token %}
+    
+            {{ form }}
+    
+            <input type="submit" name="addCard" value="addCard" id="">
+        </form>
+        <button class="pbackbutton" id="hideAddCard">back</button>
+    </div>
+</div>
+
+<script defer src="{% static 'js/show_project.js' %}"></script>
+{% endblock %}
