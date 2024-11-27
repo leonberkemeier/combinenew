@@ -7,6 +7,7 @@ from django.db.models import Count
 from .models import ProjectCategory, Project, Card
 from .forms import ProjectCategoryForm, ProjectForm, CardForm
 
+import random
 # Create your views here.
 
 
@@ -187,3 +188,46 @@ def addCard(request, *, id):
     }
     return render(request, 'cards/addCard.html',context)
 
+
+@login_required(login_url='login')
+def rendernextcard(request, *, id):
+
+    cards = Card.objects.filter(project_id=id)
+
+    try:
+        after=request.GET.get('after', None)
+        before=request.GET.get('before', None)
+        
+        if after is not None:
+            print('afterisnotnone')
+            card=cards.filter(id__gt=after).order_by('id')[0]
+            print(cards.filter(id__gt=after))
+        elif before is not None:
+            print('beforeisnotnone')
+            card=cards.filter(id__gt=before).order_by('id')[0]
+        else:
+            card=cards.order_by('id')[0]
+
+    except IndexError:
+        if len(cards) > 0:
+            card = cards[0]
+    except ValueError:
+        if len(cards) > 0:
+            card = cards[0]
+
+    context={
+        'card':card,
+    }
+    return render(request, 'card/modalhx.html', context =context)
+
+
+@login_required(login_url='login')
+def renderrndcard(request, *, id):
+    cardlist = list(Card.objects.filter(project_id=id))
+    random_item=random.choice(cardlist)
+    card = random_item
+
+    context ={
+        'card':card,
+    }
+    return render(request, 'cards/modalhx.html',context=context)

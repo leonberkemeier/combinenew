@@ -10,6 +10,7 @@
 <div class="container">
     <div class="container-header">
         <button class="showAddCardFormButton" id="showAddCardFormButton">addCard</button>
+        <button class="showModalButton" id="show-modal">showmodal</button>
         <h1><span>project name: </span> {{project.name}}</h1>
         <h1><span>project id: </span> {{row_id}}</h1>
     </div>
@@ -63,6 +64,16 @@
             <input type="submit" name="addCard" value="addCard" id="">
         </form>
         <button class="pbackbutton" id="hideAddCard">back</button>
+    </div>
+</div>
+
+
+<div class="containerModal" id="containerModal">
+    
+    {% include "cards/modalhx.html" %}
+
+    <div class="close-modal">
+        <button class="close-modal" id="close-modal"><ion-icon name="close-outline"></ion-icon></button>
     </div>
 </div>
 

@@ -1,0 +1,36 @@
+.modalcontent{
+    /* background-color: green; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.modalcontent .modal-head{
+    /* background-color: green; */
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.modalcontent .modal-body{
+    /* background-color: orange; */
+    height: calc(100% - 200px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.modalcontent .modal-footer{
+    /* background-color: yellow; */
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

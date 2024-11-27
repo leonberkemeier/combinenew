@@ -12,5 +12,20 @@ function showCardForm(){
 }
 
 function hideCardForm(){
-    AddCardForm.style.left= `-100%`;
+    AddCardForm.style.left= `-601px`;
+}
+
+showModalButton = document.getElementById('show-modal');
+hideModalButton = document.getElementById('close-modal');
+Modal = document.getElementById('containerModal');
+
+showModalButton.addEventListener("click", showModal);
+hideModalButton.addEventListener("click", hideModal);
+
+function showModal(){
+    Modal.style.right = 'calc(50% - calc(var(--modal-heigt) * 2 + 10px))';
+}
+
+function hideModal(){
+    Modal.style.right = `calc( -1 * calc(var(--modal-heigt) * 4 + 20px))`;
 }
