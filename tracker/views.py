@@ -223,10 +223,8 @@ def list(request):
 
 
 def balance(request):
-    networth = Networth.objects.first()
-    income = networth.incomeM
-    balance = networth.balance
-    assets = networth.assets
+    
+    
 
     expenses, month, year = datefilter(request)
 
@@ -253,10 +251,9 @@ def balance(request):
     totalexpenses = sumExpenses 
 
     context={
-        'income':income,
+        
         'totalexpenses':totalexpenses,
-        'assets':assets,
-        'balance':balance,
+        
 
     }
     return render(request, 'tracker/balance.html', context)

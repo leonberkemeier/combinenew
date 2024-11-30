@@ -4,9 +4,31 @@
 
 {% block content%}
 <link rel="stylesheet" href="{% static 'css/balance.css' %}">
-<h1>BALANCE</h1>
-<a href="https://www.lexware.de/wissen/mitarbeiter-gehalt/lohnsteuer-berechnen/">create a tool like this</a>
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <td>Category</td>
+                <td>Amount</td>
+                <td>Describtion</td>
+                <td>date</td>
+                <td>edit</td>
+                <td>info</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Income</td>
+                <td>23</td>
+                <td>desc</td>
+                <td>date</td>
+                <td>edit</td>
+                <td>info</td>
+            </tr>
+        </tbody>
+    </table>
 
+</div>
 
 <script defer src="{% static 'js/balance.js' %}"></script>
 {% endblock %}

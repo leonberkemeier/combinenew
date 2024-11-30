@@ -31,8 +31,38 @@
                 <tr>
                     <td> {{card.id}}</td>
                     <td> {{card.title}}</td>
-                    <td> {{card.front}}</td>
-                    <td> {{card.back}}</td>
+                    <td>
+                        {% if card.front %}
+    
+                        <!-- <h3>{{ card.front }}</h3> -->
+    
+                        <img class="front" src="{{card.front.url}}" class="picsize">
+    
+                        {% else %}
+    
+                          {% if card.fronttext %}
+                          <h1>{{card.fronttext}}</h1>
+                          {% else %}
+    
+                          <h6>pup</h6>
+                          {%endif%}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if card.back %}
+                        <!-- <h3>{{ card.back }}</h3> -->
+                        <img class="back" src="{{card.back.url}}" class="picsize" >
+                        {% else %}
+    
+                        {% if card.backtext %}
+                        <h1>{{card.backtext}}</h1>
+    
+                        {% else %}
+                        <h1>none</h1>
+    
+                        {% endif %}
+                        {% endif %}
+                    </td>
                     <td> <a href=""><ion-icon name="create-outline"></ion-icon></a></td>
                     <td> <a href=""><ion-icon name="trash-outline"></ion-icon></a></td>
                 </tr>
@@ -56,12 +86,14 @@
 <div class="containerCardForm" id="AddCard">
     <h2> add PC</h2>
     <div class="form-container">
-        <form action="/addCard/{{row_id}}" method="POST">
+        <form action="/addCard/{{row_id}}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
     
             {{ form }}
     
-            <input type="submit" name="addCard" value="addCard" id="">
+            <button type="submit" class="subber">
+                <ion-icon class="ionicon" name="checkmark-outline"></ion-icon>
+            </button>
         </form>
         <button class="pbackbutton" id="hideAddCard">back</button>
     </div>
@@ -78,4 +110,6 @@
 </div>
 
 <script defer src="{% static 'js/show_project.js' %}"></script>
+<!-- hx rendern -->
+<script src="https://unpkg.com/htmx.org@1.1.0"></script>
 {% endblock %}

@@ -23,9 +23,11 @@ class ProjectForm(forms.ModelForm):
 
 class CardForm(forms.ModelForm):
     title=forms.CharField(required=True)
-    front=forms.CharField(required=True)
-    back=forms.CharField(required=True)
+    front = forms.ImageField(required=False)
+    back = forms.ImageField(required=False)
+    fronttext = forms.CharField(required=False)
+    backtext = forms.CharField(required=False)
 
     class Meta:
         model=Card
-        fields=('title', 'front', 'back')
+        fields=('title', 'front', 'back', 'fronttext', 'backtext')

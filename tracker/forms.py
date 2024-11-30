@@ -1,5 +1,5 @@
 from django import forms
-from .models import ExpensesItem, Purpose, Networth, FixedCost
+from .models import ExpensesItem, Purpose, Networth, FixedCost, Income
 
 
 class ExpensesForm(forms.ModelForm):
@@ -34,5 +34,8 @@ class FixedCostForm(forms.ModelForm):
     class Meta:
         model = FixedCost
         fields =('__all__')
-
-
+        
+class IncomeForm(forms.ModelForm):
+    class Meta:
+        model = Income
+        fields =('__all__')

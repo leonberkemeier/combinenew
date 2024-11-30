@@ -15,5 +15,11 @@ urlpatterns = [
    path('addCard/<int:id>', views.addCard, name="addCard"),
    path('projects', views.projects,name="projects"),
    path('projects/<int:id>',views.show_project, name="myproject_details"),
-   path('projects/<int:id>/add',views.addCard, name="addCard")
+   path('projects/<int:id>/add',views.addCard, name="addCard"),
+
+   path("projects/<int:id>/renderrndcard", views.renderrndcard, name="renderrndtpl"),
+   path("projects/<int:id>/rendernextcard", views.rendernextcard, name="rendernexttpl"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

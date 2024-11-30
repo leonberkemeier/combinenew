@@ -1,8 +1,9 @@
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'css/modalhx.css' %}">
+<link rel="stylesheet" href="{% static 'css/show_project.css' %}">
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
 
-<div class="modalcontent">
+<div class="modalcontent" id="modalcontent">
     <div class="modal-head">
         <h1>{{card.id}}</h1>
         <br>
@@ -11,9 +12,82 @@
         </h1>
     </div>
     <div class="modal-body">
-        <h2>body</h2>
+        <h2>{{random_item.title}}</h2>
+        <h2>{{random_item.id}}</h2>
+        
+        <div class="card-container">
+
+            <div class="frontcard show-card" id="frontcard">
+                <h1>{{card.id}}</h1>
+                {% if card.front %}
+
+                <img src="{{card.front.url}}" alt="{{card.title}}">
+
+                {% else %}
+
+                    {% if card.fronttext %}
+
+                    <h1>{{card.fronttext}}</h1>
+
+                    {% else %}
+                    
+                    <h1>no fornt nor fronttext</h1>
+
+                    {% endif %}
+
+                {% endif %}
+            </div>
+
+            <div class="backcard" id="backcard">
+                {% if card.back %}
+                
+                <img src="{{card.back.url}}" alt="{{card.title}}">
+
+                {% else %}
+
+                    {% if card.backtext %}
+
+                    <h1>{{card.backtext}}</h1>
+
+                    {% else %}
+
+                    <h1>no back nor backtext</h1>
+
+                    {% endif %}
+
+                {% endif %}
+            </div>
+            https://uiverse.io/joe-watson-sbf/little-goat-24
+        </div>
     </div>
     <div class="modal-footer">
-        <h2>footer</h2>
+        <a hx-get="/projects/{{card.project_id}}/rendernextcard?before={{card.id}}"        
+        hx-target="#modalcontent"
+        hx-swap="outerHTML"><button>back</button></a>
+        <a id="toggle-button"><button>turn</button></a>
+        <a ><button>random</button></a>
+        <a class="block mr-2 hover:text-gray-600"
+        hx-get="/projects/{{card.project_id}}/rendernextcard?after={{card.id}}"        
+        hx-target="#modalcontent"
+        hx-swap="outerHTML">
+        <button id="forwardbtn" class="modal-buttons">
+          nexthx
+        </button>
+      </a> 
     </div>
 </div>
+
+<script>
+FrontCard=document.getElementById("frontcard");
+BackCard=document.getElementById("backcard");
+ToggleButton=document.getElementById("toggle-button");
+
+
+ToggleButton.addEventListener("click", toggleCards);
+
+
+function toggleCards(){
+    FrontCard.classList.toggle("show-card");
+    BackCard.classList.toggle("show-card");
+}
+</script>

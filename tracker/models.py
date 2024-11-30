@@ -31,7 +31,7 @@ class Networth(models.Model):
     assets = models.FloatField(null=True)
 
     def __str__(self):
-        return (str(self.incomeM) + " "+ str(self.balance) +" "+ str(self.assets) )
+        return (str(self.incomeM) + " "+ str(self.balance) +" "+ str(self.assets))
     
 
 class FixedCost(models.Model):
@@ -41,5 +41,12 @@ class FixedCost(models.Model):
     def __str__(self):
         return (str(self.amount) + " "+ str(self.purpose))
     
+class Income(models.Model):
+    income = models.IntegerField(default=0, null=False)
+    date = models.DateField(null=True, blank=True)
+    comment = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return (str(self.income) + ' ' + str(self.date))   
 
 

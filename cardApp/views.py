@@ -121,7 +121,7 @@ def projects(request):
 def show_project(request, *, id):
     project = Project.objects.get(id=id)
     cards = Card.objects.filter(project_id=id)
-    
+    card=cards.first()
     # print(request.user)
     # print(request.user.id)
     # print(project.user)
@@ -161,7 +161,8 @@ def show_project(request, *, id):
         'project':project,
         'cards':cards,
         'form':form,
-        'row_id':row_id
+        'row_id':row_id,
+        'card': card
     }
     return render(request, 'cards/show_project.html', context)
 
@@ -169,9 +170,11 @@ def show_project(request, *, id):
 @login_required(login_url='login')
 def addCard(request, *, id):
     row_id = Project.objects.get(id=id)
-    row_id = row_id.id
     
+    row_id = row_id.id
+    print("aufrufs")
     form = CardForm(request.POST)
+    print(form)
     if request.method == 'POST':
         form = CardForm(request.POST, request.FILES)
         if form.is_valid():
@@ -201,10 +204,10 @@ def rendernextcard(request, *, id):
         if after is not None:
             print('afterisnotnone')
             card=cards.filter(id__gt=after).order_by('id')[0]
-            print(cards.filter(id__gt=after))
+            # print(cards.filter(id__gt=after))
         elif before is not None:
             print('beforeisnotnone')
-            card=cards.filter(id__gt=before).order_by('id')[0]
+            card=cards.filter(id__lt=before).order_by('-id')[0]
         else:
             card=cards.order_by('id')[0]
 
@@ -218,7 +221,7 @@ def rendernextcard(request, *, id):
     context={
         'card':card,
     }
-    return render(request, 'card/modalhx.html', context =context)
+    return render(request, 'cards/modalhx.html', context =context)
 
 
 @login_required(login_url='login')
@@ -229,5 +232,6 @@ def renderrndcard(request, *, id):
 
     context ={
         'card':card,
+        'random_item':random_item,
     }
     return render(request, 'cards/modalhx.html',context=context)
