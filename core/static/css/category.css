@@ -1,11 +1,3 @@
-.container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 
 * {
     margin: 0;
@@ -13,10 +5,60 @@
     box-sizing: border-box;
     font-family: "Lucida Console", "Courier New", monospace;
 }
+:root{
+    --light-grey: rgb(38,38,38);
+    --medium-grey: rgb(23, 23,23);
+    --dark-grey: rgb(13,13,13);
+    --border-radius: 10px;
+    --border-radius-s:5px;
+}
 
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+
+#showProjectCard{
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    height: 60px;
+    width: 130px;
+    background-color: grey;
+    border: none;
+    color: white;
+    border-radius: var(--border-radius-s);
+    font-size: 18px;
+}
+#showProjectCard:hover{
+    cursor: pointer;
+}
+
+#showPCCard{
+    position: absolute;
+    left: 20px;
+    bottom: 90px;
+    height: 60px;
+    width: 130px;
+    background-color: grey;
+    border: none;
+    color: white;
+    border-radius: var(--border-radius-s);
+    font-size: 18px;
+}
+
+#showPCCard:hover{
+    cursor: pointer;
+}
 .project{
     /* margin-top: 20px; */
-    margin-left: 20px;
+    margin-left: 40px;
     margin-bottom: 20px;
     height: 5vh;
     min-height: 200px;
@@ -58,6 +100,12 @@
     margin-left: 10px;
     width: 80%;
     text-transform: capitalize;
+}
+.project .project-main .info-container h1{
+    font-size: 18px;
+}
+.project .project-main .info-container h2{
+    font-size: 15px;
 }
 .project .project-main .main-icon{
     display: flex;
@@ -135,12 +183,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    height: 80px;
     color: white;
+    border-bottom: 1px solid black;
+    background-color: var(--medium-grey);
 }
 .container .body-main{
     width: 100%;
-    height: calc(100% - 100px);
+    height: calc(100% - 80px);
+    background-color: var(--light-grey);
+    
 }
 .category{
     
@@ -149,12 +201,13 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+    background-color: var(--light-grey);
     /* background-color: orange; */
     width: 100%;
 }
 .category .category-header{
-    background-color: rgba(177, 177, 177, 0.462);
+    background-color: var(--medium-grey);
+    color: white;
     /* background-color: red; */
     width: 100%;
     height: 100px;

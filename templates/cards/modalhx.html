@@ -65,7 +65,9 @@
         hx-target="#modalcontent"
         hx-swap="outerHTML"><button>back</button></a>
         <a id="toggle-button"><button>turn</button></a>
-        <a ><button>random</button></a>
+        <a hx-get="/projects/{{card.project_id}}/renderrndcard"        
+        hx-target="#modalcontent"
+        hx-swap="outerHTML"><button>random</button></a>
         <a class="block mr-2 hover:text-gray-600"
         hx-get="/projects/{{card.project_id}}/rendernextcard?after={{card.id}}"        
         hx-target="#modalcontent"

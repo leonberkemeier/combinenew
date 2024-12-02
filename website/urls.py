@@ -9,5 +9,5 @@ from django.conf import settings
 
 
 urlpatterns = [
-   path('website',views.index, name="website"),
+   path('',views.index, name="website"),
 ]

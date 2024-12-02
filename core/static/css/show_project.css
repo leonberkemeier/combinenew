@@ -36,6 +36,7 @@
     height: 500px;
     border-radius: 20px;
     transition: left .3s ease;
+
 }
 .containerCardForm h2{
     font-size: 30px;
@@ -124,8 +125,8 @@ table td{
     font-size: 40px;
 }
 table td img{
-    width: 400px;
-    height: 300px;
+    width: calc(5vh * 4);
+    height: calc(5vh * 3);
 }
 table td a{
     color: var(--purple-dark);
@@ -195,6 +196,7 @@ table{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 3;
     
 }
 .modalcontent .modal-head{
@@ -288,6 +290,6 @@ table{
 }
 
 .show-card{
-    z-index: 3;
+    z-index: 4;
 }
 
