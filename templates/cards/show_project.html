@@ -29,8 +29,8 @@
             <tbody>
                 {% for card in cards %}
                 <tr>
-                    <td> {{card.id}}</td>
-                    <td> {{card.title}}</td>
+                    <td> <h1>{{card.id}}</h1></td>
+                    <td> <h1>{{card.title}}</h1></td>
                     <td>
                         {% if card.front %}
     
@@ -63,7 +63,7 @@
                         {% endif %}
                         {% endif %}
                     </td>
-                    <td> <a href=""><ion-icon name="create-outline"></ion-icon></a></td>
+                    <td> <a href="" data-bs-toggle="containerEditCardForm " data-bs-target="#editCardModal_{{card.id}}"><ion-icon name="create-outline"></ion-icon></a></td>
                     <td> <a href=""><ion-icon name="trash-outline"></ion-icon></a></td>
                 </tr>
                 {% endfor %}
@@ -84,7 +84,7 @@
 
 
 <div class="containerCardForm" id="AddCard">
-    <h2> add PC</h2>
+    <h2> add Card</h2>
     <div class="form-container">
         <form action="/addCard/{{row_id}}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -98,6 +98,40 @@
         <button class="pbackbutton" id="hideAddCard">back</button>
     </div>
 </div>
+
+<!-- <div class="containerEditCardForm" id="editCardModal_{{card.id}}">
+    <h2>edit Card</h2>
+    <div class="form-container">
+        <form action="/addCard/{{row_id}}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+    
+            <div class="modal-form">
+                <input type="hidden" name="id" value="card.id">
+                <div class="">
+                    <label for="front">cardfront</label>
+                    <input type="file" name="front" value="{card.front}" id="front" required>
+                </div>
+                <div class="">
+                    <label for="back">cardback</label>
+                    <input type="file" name="back" value="{card.back}" id="back" required>
+                </div>
+                <div class="">
+                    <label for="fronttext">cardfronttext</label>
+                    <input type="text" name="fronttext" value="{card.fronttext}" id="fronttext" required>
+                </div>
+                <div class="">
+                    <label for="fronttext">cardbacktext</label>
+                    <input type="text" name="backtext" value="{card.backtext}" id="backtext" required>
+                </div>
+            </div>  
+    
+            <button type="submit" class="subber">
+                <ion-icon class="ionicon" name="checkmark-outline"></ion-icon>
+            </button>
+        </form>
+        <button class="pbackbutton" id="hideEditCard">back</button>
+    </div>
+</div> -->
 
 
 <div class="containerModal" id="containerModal">

@@ -6,7 +6,8 @@ from datetime import date,datetime
 import datetime as dt
 
 from .models import ExpensesItem, Purpose, Networth ,FixedCost
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 import calendar
 from calendar import monthrange
 from django.core import serializers
@@ -19,7 +20,7 @@ import json
 
 
 
-
+@login_required(login_url='login')
 def tracker(request):
     expenses, month, year = datefilter(request)
     
@@ -107,6 +108,7 @@ def tracker(request):
 
     return render(request, "tracker/tracker.html", context)
 
+@login_required(login_url='login')
 def list(request):
     
     # current_year = datetime.now().year
@@ -221,7 +223,7 @@ def list(request):
     }
     return render(request, 'tracker/list.html', context)
 
-
+@login_required(login_url='login')
 def balance(request):
     
     
@@ -351,7 +353,7 @@ def expenseList(exp):
 
 
 # Expense
-
+@login_required(login_url='login')
 def addexpense(request):
     
     form = ExpensesForm(request.POST)
@@ -369,7 +371,7 @@ def addexpense(request):
 
 
 
-
+@login_required(login_url='login')
 def editexpense(request, pk):
 
     expense = ExpensesItem.objects.get(id=pk)
@@ -390,7 +392,7 @@ def editexpense(request, pk):
     }
     return render(request, "tracker/expensesedit.html" ,context)
 
-
+@login_required(login_url='login')
 def deleteexpense(request, pk):
 
     expense = ExpensesItem.objects.get(id=pk)
@@ -414,6 +416,7 @@ def deleteexpense(request, pk):
 
 # Purpose
 
+@login_required(login_url='login')
 def addpurpose(request):
     
     form = PurposeForm(request.POST)
@@ -429,7 +432,7 @@ def addpurpose(request):
     
     return render(request, "tracker/purposeadd.html" ,context)
 
-
+@login_required(login_url='login')
 def editpurpose(request, pk):
 
     purpose = Purpose.objects.get(id=pk)
@@ -450,6 +453,7 @@ def editpurpose(request, pk):
     }
     return render(request, "tracker/purposeedit.html" ,context)
 
+@login_required(login_url='login')
 def deletepurpose(request, pk):
 
     purpose = Purpose.objects.get(id=pk)
@@ -471,7 +475,7 @@ def deletepurpose(request, pk):
 
 # NETWORTH
 
-
+@login_required(login_url='login')
 def addnetworth(request):
     
     form = NetworthForm(request.POST)
@@ -487,7 +491,7 @@ def addnetworth(request):
     
     return render(request, "tracker/netadd.html" ,context)
 
-
+@login_required(login_url='login')
 def editnetworth(request, pk):
 
     networth = Networth.objects.get(id=pk)
@@ -512,7 +516,7 @@ def editnetworth(request, pk):
 
 
 # FixedCost
-
+@login_required(login_url='login')
 def addFixedCost(request):
     
     form = FixedCostForm(request.POST)
@@ -528,7 +532,7 @@ def addFixedCost(request):
     
     return render(request, "tracker/FixedCostAdd.html" ,context)
 
-
+@login_required(login_url='login')
 def editFixedCost(request, pk):
 
     purpose = FixedCost.objects.get(id=pk)
@@ -549,7 +553,7 @@ def editFixedCost(request, pk):
     }
     return render(request, "tracker/FixedCostEdit.html" ,context)
 
-
+@login_required(login_url='login')
 def deleteFixedCost(request, pk):
 
     purpose = FixedCost.objects.get(id=pk)

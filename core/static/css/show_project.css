@@ -11,7 +11,7 @@
  --dark-grey: rgb(13,13,13);
 
  --purple-light:rgb(114, 116, 214);
- --purple-dark:rgb(88, 95, 164);
+ --purple-dark:rgb(57, 40, 79);
 
  --sidebar-width: 200px;
  --border-radius: 5px;
@@ -19,7 +19,7 @@
  --border-radius: 10px;
  --border-radius-s:5px;
 
- --modal-heigt:15vw;
+ --modal-heigt:13vw;
  --modal-header: 100px;
  --modal-footer:100px;
 }
@@ -27,7 +27,7 @@
 .containerCardForm{
     position: absolute;
     left: -601px;
-    background-color: blue;
+    background-color: var(--purple-dark);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,8 +38,10 @@
     transition: left .3s ease;
 
 }
+
 .containerCardForm h2{
     font-size: 30px;
+    color: white;
 }
 
 .containerCardForm .heading{
@@ -76,6 +78,55 @@
 .containerCardForm .form-container .pbackbutton:hover{
     cursor: pointer;
 }
+
+.containerEditCardForm{
+    position: absolute;
+    /* left: -601px; */
+    background-color: var(--purple-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 600px;
+    height: 500px;
+    border-radius: 20px;
+    transition: left .3s ease;   
+}
+.containerEditCardForm h2{
+    color: white;
+}
+
+.containerEditCardForm .heading{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+.containerEditCardForm .form-container{
+    height: calc(100% - 100px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.containerEditCardForm .form-container .pbackbutton{
+    background-color: rgb(255, 89, 89);
+    border: none;
+    position: absolute;
+    left: -10px;
+    bottom: -10px;  
+    border: 1px solid black;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 30px;
+}
+.containerEditCardForm .form-container .pbackbutton:hover{
+    cursor: pointer;
+}
 .container{
     display: flex;
     justify-content: center;
@@ -94,9 +145,21 @@
     height: 100px;
     width: 100%;
 }
+.container-header button{
+    height: 40px;
+    width: 130px;
+    font-size: 18px;
+    border: none;
+    background-color: rgb(32, 32, 32);
+    color: white;
+    border-radius: 5px;
+}
 .container-main{
     height: calc( 100% - 100px);
     
+}
+.container-main h1{
+    font-size: 15px;
 }
 table{
     /* border: 1px solid black; */
@@ -149,7 +212,7 @@ table{
     position: absolute;
     left:calc( -4 * calc(var(--modal-heigt) + 20px + 40px));
     /* left: 500px; */
-    background-color: rgb(73, 73, 197);
+    background-color: var(--purple-dark);
     border: 1px solid black;
     display: flex;
     justify-content: center;
@@ -159,6 +222,7 @@ table{
     height: calc(var(--modal-heigt) * 3 + 200px);
     border-radius: 20px;
     transition: left .3s ease;
+    color: white;
 }
 .containerModal .close-modal{
     background-color: red;
@@ -196,7 +260,7 @@ table{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 3;
+    /* z-index: 3; */
     
 }
 .modalcontent .modal-head{

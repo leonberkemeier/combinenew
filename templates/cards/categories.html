@@ -9,16 +9,16 @@
 <link rel="stylesheet" href="{% static 'css/category.css' %}">
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
 <div class="container">
-    <div class="header">
+    <!-- <div class="header">
         <h1>Cards</h1>
         
-    </div>
+    </div> -->
     <div class="body-main">
         {% for projectcategory in projectcategories %}
         
         <div class="category">
             <div class="category-header">
-                <h1>{{projectcategory.name}} <span>{{projectcategory.id}}</span></h1>
+                <h1><span>{{projectcategory.id}}  </span>{{projectcategory.name}} </h1>
 
                 <ion-icon name="chevron-down-outline"></ion-icon>
             </div>
