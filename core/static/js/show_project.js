@@ -16,7 +16,7 @@ showModalButton.addEventListener("click", showModal);
 hideModalButton.addEventListener("click", hideModal);
 
 function showCardForm(){
-    AddCardForm.style.left= `calc(50% - 300px)`;
+    AddCardForm.style.left= `calc(50% - 200px)`;
     Modal.style.left = `calc( -1 * calc(var(--modal-heigt) * 4 + 20px + 40px))`;
 }
 

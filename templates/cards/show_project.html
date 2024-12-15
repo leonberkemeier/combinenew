@@ -9,8 +9,7 @@
 
 <div class="container">
     <div class="container-header">
-        <button class="showAddCardFormButton" id="showAddCardFormButton">addCard</button>
-        <button class="showModalButton" id="show-modal">showmodal</button>
+        
         <h1><span>project name: </span> {{project.name}}</h1>
         <h1><span>project id: </span> {{row_id}}</h1>
     </div>
@@ -36,7 +35,7 @@
     
                         <!-- <h3>{{ card.front }}</h3> -->
     
-                        <img class="front" src="{{card.front.url}}" class="picsize">
+                        <img class="front" src="{{card.front.url}}" class="picsize" loading="lazy">
     
                         {% else %}
     
@@ -51,7 +50,7 @@
                     <td>
                         {% if card.back %}
                         <!-- <h3>{{ card.back }}</h3> -->
-                        <img class="back" src="{{card.back.url}}" class="picsize" >
+                        <img class="back" src="{{card.back.url}}" class="picsize" loading="lazy">
                         {% else %}
     
                         {% if card.backtext %}
@@ -81,7 +80,8 @@
     
 </div>
 
-
+<button class="showAddCardFormButton" id="showAddCardFormButton">addCard</button>
+<button class="showModalButton" id="show-modal">showmodal</button>
 
 <div class="containerCardForm" id="AddCard">
     <h2> add Card</h2>
@@ -146,4 +146,16 @@
 <script defer src="{% static 'js/show_project.js' %}"></script>
 <!-- hx rendern -->
 <script src="https://unpkg.com/htmx.org@1.1.0"></script>
+<script>
+    document.addEventListener("keydown", e =>{
+    if (e.key.toLowerCase() === "o"){
+        document.getElementById('show-modal').click();
+    }
+    });
+    document.addEventListener("keydown", e =>{
+    if (e.key.toLowerCase() === "a"){
+        document.getElementById('showAddCardFormButton').click();
+    }
+    });
+</script>
 {% endblock %}

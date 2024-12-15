@@ -15,7 +15,7 @@ hideCategoryButton.addEventListener("click", hideCategory);
 
 
 function showProject(){
-    ProjectCard.style.left = `calc(50% - 300px)`;
+    ProjectCard.style.left = `calc(50% - 200px)`;
     PCCard.style.left = `-100%`;
 };
 // alert("he")
@@ -28,7 +28,7 @@ function hideProject(){
 
 
 function showCategory(){
-    PCCard.style.left = `calc(50% - 300px)`;
+    PCCard.style.left = `calc(50% - 200px)`;
     ProjectCard.style.left = `-100%`;
 };
 function hideCategory(){

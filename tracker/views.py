@@ -410,8 +410,7 @@ def deleteexpense(request, pk):
     return render(request, "tracker/expensedelete.html" ,context)
 
 
-
-# Income
+# INCOME
 
 @login_required(login_url='login')
 def addincome(request):
@@ -427,9 +426,7 @@ def addincome(request):
  
     context = {'form' : form }
     
-    return render(request, "tracker/incomeadd.html" ,context)
-
-
+    return render(request, "tracker/expenseadd.html" ,context)
 
 @login_required(login_url='login')
 def editincome(request, pk):
@@ -468,6 +465,7 @@ def deleteincome(request, pk):
         'expense':expense
     }
     return render(request, "tracker/expensedelete.html" ,context)
+
 
 
 

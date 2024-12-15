@@ -30,7 +30,8 @@ SECRET_KEY = 'django-insecure-)d4=3i!=szbc2i(89vj%2j65hx@m+729_bx3%oly7j$gd!qu4-
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost'
+    'localhost',
+    'leonberkemeier.de'
 ]
 
 
@@ -49,6 +50,10 @@ INSTALLED_APPS = [
     'tracker',
     'crispy_forms',
     'bootstrap5',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://leonberkemeier.de"
 ]
 
 MIDDLEWARE = [

@@ -12,8 +12,8 @@
         </h1>
     </div>
     <div class="modal-body">
-        <h2>{{random_item.title}}</h2>
-        <h2>{{random_item.id}}</h2>
+        <!-- <h2>{{random_item.title}}</h2>
+        <h2>{{random_item.id}}</h2> -->
         
         <div class="card-container">
 
@@ -63,11 +63,11 @@
     <div class="modal-footer">
         <a hx-get="/projects/{{card.project_id}}/rendernextcard?before={{card.id}}"        
         hx-target="#modalcontent"
-        hx-swap="outerHTML"><button>back</button></a>
-        <a id="toggle-button"><button>turn</button></a>
+        hx-swap="outerHTML"><button id="backbtn">back</button></a>
+        <a id="toggle-button"><button id="turn">turn</button></a>
         <a hx-get="/projects/{{card.project_id}}/renderrndcard"        
         hx-target="#modalcontent"
-        hx-swap="outerHTML"><button>random</button></a>
+        hx-swap="outerHTML"><button id="randombutton">random</button></a>
         <a class="block mr-2 hover:text-gray-600"
         hx-get="/projects/{{card.project_id}}/rendernextcard?after={{card.id}}"        
         hx-target="#modalcontent"
@@ -91,5 +91,26 @@ ToggleButton.addEventListener("click", toggleCards);
 function toggleCards(){
     FrontCard.classList.toggle("show-card");
     BackCard.classList.toggle("show-card");
-}
+};
+
+document.addEventListener("keydown", e =>{
+        if (e.key.toLowerCase() === "r"){
+            document.getElementById('randombutton').click();
+        }
+});
+document.addEventListener("keydown", e =>{
+    if (e.key.toLowerCase() === "l"){
+        document.getElementById('forwardbtn').click();
+    }
+});
+document.addEventListener("keydown", e =>{
+    if (e.key.toLowerCase() === "b"){
+        document.getElementById('turn').click();
+    }
+});
+document.addEventListener("keydown", e =>{
+    if (e.key.toLowerCase() === "j"){
+        document.getElementById('backbtn').click();
+    }
+});
 </script>

@@ -250,7 +250,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 600px;
+    width: 400px;
     height: 400px;
     border-radius: 20px;
     transition: left .3s ease;
@@ -306,7 +306,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 600px;
+    width: 400px;
     height:300px;
     border-radius: 20px;
     transition: left .3s ease;
@@ -344,4 +344,19 @@
 }
 .containerProjectCategory .form-container .pcBackButton:hover{
     cursor: pointer;
+}
+
+@media only screen and (max-width: 420px) {
+    .project{
+        margin-left: 5px;
+        
+    }
+    .containerProject{
+        
+        left: -120%;
+    }
+    .containerProjectCategory{
+        left: -120%;
+        
+    }
 }
