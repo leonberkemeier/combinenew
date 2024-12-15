@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 
-from .forms import ExpensesForm, PurposeForm, NetworthForm, FixedCostForm
+from .forms import ExpensesForm, PurposeForm, NetworthForm, FixedCostForm, IncomeForm
 from django.contrib import messages
 from datetime import date,datetime
 import datetime as dt
 
-from .models import ExpensesItem, Purpose, Networth ,FixedCost
+from .models import ExpensesItem, Purpose, Networth ,FixedCost, Income
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import calendar
@@ -410,6 +410,64 @@ def deleteexpense(request, pk):
     return render(request, "tracker/expensedelete.html" ,context)
 
 
+
+# Income
+
+@login_required(login_url='login')
+def addincome(request):
+    
+    form = IncomeForm(request.POST)
+
+    if request.method == 'POST':
+        #print('printpost',request.POST)
+        form = IncomeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/list')
+ 
+    context = {'form' : form }
+    
+    return render(request, "tracker/incomeadd.html" ,context)
+
+
+
+@login_required(login_url='login')
+def editincome(request, pk):
+
+    expense = Income.objects.get(id=pk)
+    form = IncomeForm(instance=expense)
+
+    if request.method == 'POST':
+
+        #print('hey', request.POST)
+        form = IncomeForm(request.POST, instance=expense)
+        if form.is_valid():
+            form.save()
+            return redirect('/list')
+ 
+    context={
+        'form':form,
+        'expense':expense,
+
+    }
+    return render(request, "tracker/expensesedit.html" ,context)
+
+@login_required(login_url='login')
+def deleteincome(request, pk):
+
+    expense = Income.objects.get(id=pk)
+    form = IncomeForm(instance=expense)
+
+    if request.method == 'POST':
+
+        expense.delete()
+        return redirect('/list')
+ 
+    context={
+        'form':form,
+        'expense':expense
+    }
+    return render(request, "tracker/expensedelete.html" ,context)
 
 
 
