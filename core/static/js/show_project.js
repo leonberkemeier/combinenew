@@ -7,6 +7,9 @@ AddCardForm = document.getElementById("AddCard");
 showAddCardFormButton.addEventListener("click", showCardForm);
 hideAddCardFormButton.addEventListener("click", hideCardForm);
 
+var w = window.innerWidth;
+console.log("viewPortWithd: " + w);
+
 
 showModalButton = document.getElementById('show-modal');
 hideModalButton = document.getElementById('close-modal');
@@ -16,20 +19,21 @@ showModalButton.addEventListener("click", showModal);
 hideModalButton.addEventListener("click", hideModal);
 
 function showCardForm(){
-    AddCardForm.style.left= `calc(50% - 200px)`;
-    Modal.style.left = `calc( -1 * calc(var(--modal-heigt) * 4 + 20px + 40px))`;
+    AddCardForm.classList.add("show-modal")
+    Modal.classList.remove("show-modal");
 }
 
 function hideCardForm(){
-    AddCardForm.style.left= `-601px`;
+    AddCardForm.classList.remove("show-modal");    
 }
 
 
 function showModal(){
-    Modal.style.left = 'calc(50% - calc(var(--modal-heigt) * 2 + 10px))';
-    AddCardForm.style.left= `-601px`;
+    
+    Modal.classList.add("show-modal");
+    AddCardForm.classList.remove("show-modal");
 }
 
 function hideModal(){
-    Modal.style.left = `calc( -1 * calc(var(--modal-heigt) * 4 + 20px + 40px))`;
+    Modal.classList.remove("show-modal");
 }

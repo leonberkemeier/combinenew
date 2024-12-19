@@ -1,4 +1,10 @@
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .body-main{
     width: 100%;
     height: calc(100vh - var(--header-height) - 5px);
@@ -206,49 +212,39 @@
     .body-main .container-bm-second{max-height: 1200px;}
     .body-main .container-bm-third{max-height: 1200px;}
 
-    .main .header-main{
-        height: 200px;
+    
+    
+}
+@media only screen and (max-width: 1000px) {
+    .body-main .container-bm-first{
+        width: 90%;
     }
-    .main .header-main h1{
-        font-size: 30px;
+    .body-main .container-bm-second{
+        width: 90%;
     }
-    .sidebar{
-        width: 40%;
-        max-width: 50%;
-        opacity: .8;
+    .body-main .container-bm-third{
+        width: 90%;
+        padding: 0px;
     }
-    .main{
-        margin-left: 0px ;
+    .body-main .container-bm-third .third-container{
+        padding: 0px;
+    }
+    .body-main .container-bm-second .second-container .networth_per_day{
+        margin-bottom: 10px;
+        
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .body-main .container-bm-third .third-container{
+        flex-direction: column;
+
+    }
+    .body-main .container-bm-third .third-container .PurposeList_container{
         width: 100%;
+        margin-right: 0px;
     }
-    .main .header-main ion-icon{
-        font-size: 50px;
-    }
-    .sidebar .header-sidebar{
-        display: flex;
-        justify-content: right;
-        padding: 0 40px 0 0 ;
-    }
-    .sidebar .header-sidebar ion-icon{
-        font-size: 50px;
-        margin-top: 50px;
-        border-radius: 5px;
-    }
-    .sidebar .header-sidebar h1{
-        display: none;
-    }
-    .time h3, .year h3, .month h3, .expenses h3{
-        font-size: 50px;
-    }
-    .time span{
-        font-size: 50px;
-    }
-    .years button, .month button,.expenses button{
-        display: flex;
-        justify-content: center;
-        margin: 10px;
-        font-size: 40px;
-        height: 60px;
-        width: 300px;
+    .body-main .container-bm-third .third-container .donut_container{
+        width: 100%;
+        margin-top: 5px;
     }
 }

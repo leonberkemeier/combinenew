@@ -20,6 +20,7 @@
  --border-radius-s:5px;
 
  --modal-heigt:15vw;
+ --modal-width:50vw;
  --modal-header: 100px;
  --modal-footer:100px;
 }
@@ -150,9 +151,9 @@
     height: calc( 100% - 100px);
     
 }
-.container-main h1{
+/* .container-main h1{
     font-size: 15px;
-}
+} */
 table{
     /* border: 1px solid black; */
     border-radius: 5px;
@@ -179,6 +180,12 @@ table td{
     min-width: 90px;
     font-size: 40px;
 }
+table td h1{
+    font-size: 16px;
+}
+table td h6{
+    font-size: 15px;
+}
 table td img{
     width: calc(5vh * 4);
     height: calc(5vh * 3);
@@ -201,6 +208,7 @@ table{
 /* b = 4 x y */
 
 .containerModal{
+    aspect-ratio: 3 / 4;
     position: absolute;
     left:calc( -4 * calc(var(--modal-heigt) + 20px + 40px));
     /* left: 500px; */
@@ -210,8 +218,10 @@ table{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: calc(var(--modal-heigt) * 4 + 20px);
-    height: calc(var(--modal-heigt) * 3 + 200px);
+    /* width: calc(var(--modal-heigt) * 4 + 20px);
+    height: calc(var(--modal-heigt) * 3 + 200px); */
+    width: 50vw;
+    max-height: 80vh;
     border-radius: 20px;
     transition: left .3s ease;
     color: white;
@@ -232,6 +242,7 @@ table{
     align-items: center;
     font-size: 40px;
     border: 1px solid black;
+    z-index: 4;
 }
 
 .containerModal .close-modal button:hover{
@@ -262,7 +273,7 @@ table{
     display: flex;
     justify-content: center;
     align-items: center;
-
+    z-index: 4;
 }
 .modalcontent .modal-body{
     /* background-color: orange; */
@@ -271,7 +282,11 @@ table{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    /* padding: 10px; */
+     /* background-color: green; */
+    aspect-ratio: 3 / 4;
+    
+    position: relative;
 }
 .modalcontent .modal-footer{
     /* background-color: yellow; */
@@ -283,10 +298,15 @@ table{
 }
 
 .modalcontent .modal-body .card-container{
-    background-color: green;
+    /* background-color: green;
+    aspect-ratio: 3 / 4;
     width: calc(var(--modal-heigt) * 4);
     height: calc(var(--modal-heigt) * 3);
-    position: relative;
+    width: calc(50vw - 20px);
+    height: calc(80vh - 160px);
+    position: relative; */
+    height: 100%;
+    width: 100%;
 }
 
 .modalcontent .modal-body .card-container .frontcard{
@@ -336,6 +356,7 @@ table{
     text-decoration: none;
     font-size: 30px;
     /* background-color: green; */
+    z-index: 4;
 }
 .modalcontent .modal-footer a button{
     width: 100%;
@@ -347,6 +368,12 @@ table{
 
 .show-card{
     z-index: 4;
+    
+}
+.show-modal{
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .showAddCardFormButton{
@@ -384,9 +411,12 @@ table{
     .container .container-header h1{
         font-size: 15px;
     }
+    table{
+        width: 100%;
+    }
     table td img{
-        width: calc(3vh * 4);
-        height: calc(3vh * 3);
+        width: calc(2vh * 4);
+        height: calc(2vh * 3);
     }
     table td h1{
         font-size: 10px;
@@ -398,5 +428,19 @@ table{
         font-size: 12px;
         min-width: 50px;
     }
-    
+    table td{
+        min-width:  40px;
+    }
+    table td h6{
+        font-size: 10px;
+    }
+    .container-header{
+        height: 40px;
+    }
+    .container-main{
+        height: calc( 100% - 40px);
+    }
+    .containerModal{
+        width: 400px;
+    }
 }

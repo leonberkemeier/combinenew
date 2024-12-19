@@ -107,14 +107,14 @@ def addProject(request):
     }
     return render(request, 'cards/addProject.html',context)
 
-@login_required(login_url='login')
-def projects(request):
-    projects=Project.objects.filter(user=request.user)
+# @login_required(login_url='login')
+# def projects(request):
+#     projects=Project.objects.filter(user=request.user)
     
-    context={
-        'projects':projects
-    }
-    return render(request, 'cards/projects.html', context)
+#     context={
+#         'projects':projects
+#     }
+#     return render(request, 'cards/projects.html', context)
 
 
 @login_required(login_url='login')

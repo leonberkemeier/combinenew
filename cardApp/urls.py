@@ -6,6 +6,7 @@ from django.conf import settings
 
 
 urlpatterns = [
+   path('projects',views.index, name="cards"),
    path('cards',views.index, name="cards"),
    path('login',views.loginPage, name="login"),
    path('logout', views.logoutUser, name='logout'),
@@ -13,7 +14,7 @@ urlpatterns = [
    path('addProject', views.addProject, name='addProject'),
    path('addCard', views.addCard, name="addCard"),
    path('addCard/<int:id>', views.addCard, name="addCard"),
-   path('projects', views.projects,name="projects"),
+   # path('projects', views.projects,name="projects"),
    path('projects/<int:id>',views.show_project, name="myproject_details"),
    path('projects/<int:id>/add',views.addCard, name="addCard"),
 
