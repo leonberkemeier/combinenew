@@ -202,6 +202,7 @@ body{
     height: 100%;
 }
 .body-main .container-list-second .FixedCost{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -210,6 +211,17 @@ body{
     background-color: var(  --light-grey);
     border-radius: var(--border-radius);
     padding: 20px;
+}
+.body-main .container-list-second .FixedCost .addFixedCosts{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 30px;
+    width: 90px;
+}
+.body-main .container-list-second .FixedCost .addFixedCosts button{
+    height: 100%;
+    width: 100%;
 }
 .body-main .container-list-second .FixedCost .container{
     height: 100%;
@@ -250,6 +262,62 @@ body{
 .body-main .container-list-second .FixedCost .container table tr:hover{
     background-color: var(--light-grey)
 }
+
+.containerAddExpense{
+    position: fixed;
+    width: 80vw;
+    max-width: 400px;
+    height: 60vh;
+    max-height: 1000px;
+    background: rgba(88, 95, 164, 0.44);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.8px);
+    -webkit-backdrop-filter: blur(9.8px);
+    border: 1px solid rgba(88, 95, 164, 0.46);
+    left: -100%;
+    transition: left .3s ease;
+}
+.show-form{
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.form-container{
+    height: 100%;
+    width: 100%;
+}
+.form-container form{
+    height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.form-container form input{
+    width: 70%;
+    height: 50px;
+}
+input[type="submit"]{
+    padding: 5px;
+   
+}
+.form-container form select{
+    width: 70%;
+    height: 50px;
+}
+.incomeBackButton, .expenseBackButton, .FCBackButton{
+    position: absolute;
+    width: 80px;
+    background-color: rgb(148, 50, 50);
+    height: 40px;
+    bottom: -25px ;
+    left: -25px;
+}
+
 
 @media only screen and (max-width: 1380px) {
     .body-main .container-list-first{

@@ -404,3 +404,35 @@ var layoutd = {
 
 Plotly.newPlot('theDonut', datad, layoutd,config);
 
+
+
+AddIncomeButton = document.getElementById('AddIncomeButton');
+HideIncomeButton = document.getElementById('hideAddIncome');
+AddIncomeForm = document.getElementById('AddIncome');
+
+AddIncomeButton.addEventListener("click", showAddIncome);
+HideIncomeButton.addEventListener("click", hideAddIncome);
+
+AddExpenseButton = document.getElementById('AddExpenseButton');
+HideExpenseButton = document.getElementById('hideAddExpense');
+AddExpenseForm = document.getElementById('AddExpense');
+
+AddExpenseButton.addEventListener("click", showAddExpense);
+HideExpenseButton.addEventListener("click", hideAddExpense);
+
+function showAddIncome(){
+  AddIncomeForm.classList.add('show-form');
+  AddExpenseForm.classList.remove('show-form');
+  
+}
+function hideAddIncome(){
+  AddIncomeForm.classList.remove('show-form');
+}
+
+function showAddExpense(){
+  AddExpenseForm.classList.add('show-form');
+  AddIncomeForm.classList.remove('show-form');
+}
+function hideAddExpense(){
+  AddExpenseForm.classList.remove('show-form');
+}

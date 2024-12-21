@@ -22,7 +22,7 @@ import json
 
 @login_required(login_url='login')
 def tracker(request):
-    expenses, month, year = datefilter(request)
+    expenses, income2, month, year = datefilter(request)
     
     if year is not None and month is not None:
         days = calendar.monthrange(int(year),int(month))[1]
@@ -32,10 +32,13 @@ def tracker(request):
 
     networth = Networth.objects.first()
     income = networth.incomeM
-    balance = networth.balance
+
+    incomesum=income2.aggregate(Sum('income')).get('income__sum')
+    income = incomesum
+    
     assets = networth.assets
     rel_balance = networth.balance
-    avgincome = round(income/days, 2)
+    avgincome = round(incomesum/days, 2)
     
     # Array of days
     days_array=[]    
@@ -48,6 +51,7 @@ def tracker(request):
 
     sumExpens=0
     sumExpenses=round(sumExpens,2)
+    
 
     for i in range(days):
         
@@ -83,6 +87,25 @@ def tracker(request):
     pl = purposeList(filter='purpose') 
     # print(pl)
     el = expenseList(expenses)
+
+    sumcosts = sumExpenses
+
+    #Sum fixed Costs
+    
+    sumfixedcosts=0
+    fixedCosts = FixedCost.objects.all()
+    for i in range(len(fixedCosts)):
+        sumfixedcosts += fixedCosts[i].amount
+    print(sumfixedcosts)
+
+    totalexpenses=sumfixedcosts+sumcosts
+
+    balance = incomesum - sumcosts
+
+
+    addincomeform = IncomeForm(request.POST)
+    addexpenseform = ExpensesForm(request.POST)
+
     # print(el)
     context={
         'income':income,
@@ -101,6 +124,9 @@ def tracker(request):
         'days':days,
         'year':year,
         'month':month,
+
+        'addincomeform':addincomeform,
+        'addexpenseform':addexpenseform,
 
         'pl': pl,
         'el': el,
@@ -133,17 +159,19 @@ def list(request):
     # eql = expenseList(expenses)
     # print(eql)
   
-    expenses, month, year = datefilter(request)
+    expenses, income2, month, year = datefilter(request)
+
+    incomesum=income2.aggregate(Sum('income')).get('income__sum')
     purposes = Purpose.objects
 
-    fixedCosts = FixedCost.objects.all()
+    
     
     if year is not None and month is not None:
         days = calendar.monthrange(int(year),int(month))[1]
 
     try:
         networth = Networth.objects.first()
-        income = networth.incomeM
+        income = incomesum
         balance = networth.balance
         assets = networth.assets
         rel_balance = networth.balance
@@ -153,7 +181,7 @@ def list(request):
 
     #Sum fixed Costs
     sumfixedcosts=0
-
+    fixedCosts = FixedCost.objects.all()
     for i in range(len(fixedCosts)):
         sumfixedcosts += fixedCosts[i].amount
     print(sumfixedcosts)
@@ -187,9 +215,9 @@ def list(request):
         expenses_array.append(float(seqs))
         sumExpenses+=int(seqs)
     
-    totalexpenses = sumExpenses
+    sumcosts = sumExpenses
 
-    sumcosts=sumfixedcosts+totalexpenses
+    totalexpenses=sumfixedcosts+sumcosts
 
     # print(expenses_array)
     # print(len(expenses_array))
@@ -197,6 +225,12 @@ def list(request):
     # print(pl)
     el = expenseList(expenses)
     # print(el)
+
+    balance = incomesum - totalexpenses
+
+    addincomeform = IncomeForm(request.POST)
+    addexpenseform = ExpensesForm(request.POST)
+    addFCForm = FixedCostForm(request.POST)
 
     context = {
         'income':income,
@@ -218,6 +252,11 @@ def list(request):
         # 'expenses_and_income_pd':expenses_and_income_pd,
         'fixedCosts': fixedCosts,
         'sumfixedcosts':sumfixedcosts,
+
+        'addincomefrom':addincomeform,
+        'addexpenseform':addexpenseform,
+        'addFCForm': addFCForm,
+
         'pl':pl,
         'el':el
     }
@@ -228,12 +267,12 @@ def balance(request):
     
     
 
-    expenses, month, year = datefilter(request)
+    expenses,income, month, year = datefilter(request)
 
     if year is not None and month is not None:
         days = calendar.monthrange(int(year),int(month))[1]
 
-
+    
     # Array of Expenses
     expenses_array = []
 
@@ -299,6 +338,14 @@ def assets(request):
     }
     return render(request, 'tracker/assets.html', context)
 
+def sumfixedcosts():
+    sumfixedcosts=0
+    fixedCosts = FixedCost.objects.all()
+    for i in range(len(fixedCosts)):
+        sumfixedcosts += fixedCosts[i].amount
+    print(sumfixedcosts)
+    
+    return sumfixedcosts
 
 def datefilter(request):
     current_year = datetime.now().year
@@ -306,15 +353,19 @@ def datefilter(request):
     year = request.GET.get('year', current_year)
     month = request.GET.get('month', current_month)
     expenses =ExpensesItem.objects
+    income =Income.objects
 
     if year is not None and year != '':
         expenses = expenses.filter(date__year=year)
+        income = income.filter(date__year=year)
     
     if month is not None and month != '':
         expenses = expenses.filter(date__month =month)
+        income = income.filter(date__month=month)
     expenses = expenses.all()
+    income = income.all()
     
-    return (expenses, month, year)
+    return (expenses,income, month, year)
 
 def netfilter(n):
     # print(n)

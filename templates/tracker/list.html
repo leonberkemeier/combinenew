@@ -62,6 +62,9 @@
             <div class="donutChart" id="theListDonut"></div>
         </div>
         <div class="FixedCost">
+            <div class="addFixedCosts">
+                <button class="addFixedCosts" id="addFixedCosts">addfixedCosts</button>
+            </div>
             <div class="container">
                 <table>
                     <thead>
@@ -94,6 +97,56 @@
         </div>
     </div>
 </div>  
+
+<div class="containerAddExpense" id="AddIncome">
+    <div class="heading">
+
+    </div>
+    <div class="form-container">
+        <form action="{% url 'addincome'%}" method="POST">
+            {% csrf_token %}
+    
+            {{ addincomefrom }}
+    
+            <input type="submit" name="addincome" value="addincome" id="">
+        </form>
+        <button class="incomeBackButton" id="hideAddIncome">back</button>
+    </div>
+</div>
+
+<div class="containerAddExpense" id="AddExpense">
+    <div class="heading">
+
+    </div>
+    <div class="form-container">
+        <form action="{% url 'addexpense'%}" method="POST">
+            {% csrf_token %}
+    
+            {{ addexpenseform }}
+    
+            <input type="submit" name="addexpense" value="addexpense" id="">
+        </form>
+        <button class="expenseBackButton" id="hideAddExpense">back</button>
+    </div>
+</div>
+
+<div class="containerAddExpense" id="AddFC">
+    <div class="heading">
+
+    </div>
+    <div class="form-container">
+        <form action="{% url 'addFixedCost'%}" method="POST">
+            {% csrf_token %}
+    
+            {{ addFCForm }}
+    
+            <input type="submit" name="addFixedCost" value="addFixedCost" id="">
+        </form>
+        <button class="FCBackButton" id="hideAddFC">back</button>
+    </div>
+</div>
+
+
 <script>
     const TageArray = [{% for i in days_array %} {{i}}, {% endfor %}];
     const xArray = [{% for j in expenses_array %} {{j}}, {% endfor %}];

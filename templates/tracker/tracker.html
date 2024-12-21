@@ -4,6 +4,7 @@
 
 {% block content%}
 <link rel="stylesheet" href="{% static 'css/tracking.css' %}">
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
 <div class="body-main">
     <div class="container-bm-first">
         <!-- <h1>Expenses per Day</h1> -->
@@ -50,7 +51,40 @@
                             
         </div>
     </div>
-</div>  
+</div> 
+ 
+<div class="containerAddExpense" id="AddIncome">
+    <div class="heading">
+
+    </div>
+    <div class="form-container">
+        <form action="{% url 'addincome'%}" method="POST">
+            {% csrf_token %}
+    
+            {{ addincomeform }}
+    
+            <input type="submit" name="addincome" value="addincome" id="">
+        </form>
+        <button class="incomeBackButton" id="hideAddIncome">back</button>
+    </div>
+</div>
+
+<div class="containerAddExpense" id="AddExpense">
+    <div class="heading">
+
+    </div>
+    <div class="form-container">
+        <form action="{% url 'addexpense'%}" method="POST">
+            {% csrf_token %}
+    
+            {{ addexpenseform }}
+    
+            <input type="submit" name="addexpense" value="addexpense" id="">
+        </form>
+        <button class="expenseBackButton" id="hideAddExpense">back</button>
+    </div>
+</div>
+
 <script>
     // const yArray =[{% for ex in expenses %} '{{ ex.date }}', {% endfor %}];
     // const xArray =[{% for ex in expenses %} {{ex.amount}}, {% endfor %}];

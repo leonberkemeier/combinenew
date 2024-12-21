@@ -495,6 +495,32 @@ transition: 200ms;
     overflow: hidden;
 }
 
+
+/* buttons */
+
+#AddExpenseButton{
+    position: fixed;
+    /* background-color: green; */
+    left: 10px;
+    bottom: 10px;
+    height: 40px;
+    width: 90px;
+}
+#AddIncomeButton{
+    position: fixed;
+    /* background-color: orange; */
+    left: 10px;
+    bottom: 60px;
+    width: 90px;
+    height: 40px;
+}
+
+
+
+
+
+/* media width */
+
 @media only screen and (max-width: 1460px) {
     .main .header-main{
         height: 100px;

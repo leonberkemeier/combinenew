@@ -12,8 +12,8 @@ input[type=text], select {
 
 input[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
-    color: grey;
+    background-color: rgb(88, 95, 164);
+    color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -24,7 +24,7 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-background-color: #45a049;
+background-color: rgb(114, 124, 213);
 }
 form{
     width: 80%;
@@ -51,7 +51,7 @@ input[type=text]:focus {
     position: absolute;
     right: 0px;
     bottom: -5px;
-    background-color: #45a049;
+    background-color: rgb(88, 95, 164);
     /* color: white; */
     border: 1px solid black;
     border-radius: 5px;
