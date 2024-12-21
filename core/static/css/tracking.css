@@ -53,7 +53,8 @@
 
 }
 .body-main .container-bm-first .filter_for h2{
-    padding: 20px;
+    padding: 10px;
+    font-size: 20px;
 }
 .body-main .container-bm-first .expenses_per_day{
     display: flex;
@@ -246,5 +247,47 @@
     .body-main .container-bm-third .third-container .donut_container{
         width: 100%;
         margin-top: 5px;
+    }
+}
+
+@media only screen and (max-width: 1460px) {
+    .main .header-main{
+        height: 100px;
+    }
+    .main .header-main h1{
+        font-size: 20px;
+    }
+    .sidebar{
+        width: 40%;
+        max-width: 50%;
+        opacity: .8;
+    }
+    .main{
+        margin-left: 0px ;
+        width: 100%;
+    }
+    .main .header-main ion-icon{
+        font-size: 20px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .main .header-main{
+        height: 80px;
+    }
+    .main .header-main h1{
+        font-size: 12px;
+    }
+    
+    
+    .main .header-main ion-icon{
+        font-size: 12px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .main .header-main .item{
+        flex-direction: column;
+    }
+    .sidebar{
+        width: 60%;
     }
 }
