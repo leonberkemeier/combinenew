@@ -103,7 +103,7 @@ def tracker(request):
 
     totalexpenses=sumfixedcosts+sumcosts
 
-    balance = incomesum - sumcosts
+    balance = incomesum - totalexpenses
 
 
     addincomeform = IncomeForm(request.POST)
@@ -381,14 +381,16 @@ def balance(request):
         sumfixedcosts += fixedCosts[i].amount
     fsumfixedcosts =f"{sumfixedcosts:.2f}"
 
-    totalexpenses = sumExpenses 
+    sumcosts = sumExpenses
+
+    totalexpenses=sumfixedcosts+sumcosts
     ftotalexpenses = f"{totalexpenses:.1f}"
 
     sparplan = 100
     fsparplan =f"{sparplan:.2f}"
 
     profitloss = totalincome - totalexpenses - sumfixedcosts    
-    balance = totalincome - totalexpenses -sumfixedcosts
+    balance = totalincome - sumcosts -sumfixedcosts
     balance2 = balance - sparplan
     print(balance2)
 
@@ -424,6 +426,7 @@ def balance(request):
 
         'purposelist': purposelist,
         'fixedCosts':fixedCosts,
+        'sumcosts':sumcosts,
         'sumfixedcosts':sumfixedcosts,
 
         'sparplan':fsparplan,
