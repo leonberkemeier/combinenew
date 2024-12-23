@@ -263,10 +263,10 @@ input[type="submit"]{
 
 @media only screen and (max-width: 1460px) {
     .body-main .container-bm-first{
-        max-height: 1200px;
+        max-height: 1000px;
     }
-    .body-main .container-bm-second{max-height: 1200px;}
-    .body-main .container-bm-third{max-height: 1200px;}
+    .body-main .container-bm-second{max-height: 1000px;}
+    .body-main .container-bm-third{max-height: 1000px;}
 
     
     

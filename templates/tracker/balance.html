@@ -5,85 +5,178 @@
 {% block content%}
 <link rel="stylesheet" href="{% static 'css/balance.css' %}">
 <div class="container">
-    <table>
-        <thead>
-            <tr>
-                <td>Category</td>
-                <td>info</td>
-                <td>Percent</td>
-                <td>Amount</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Income (Tax)</td>
-                <td></td>
-                <td></td>
-                <td>{{taxincomesum}}</td>
-            </tr>
-            <tr>
-                <td>&emsp;Kirchensteuer</td>
-                <td></td>
-                <td>{{KS}}</td>
-                <td>({{KSA}})</td>
+    <div class="income-table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 60%">Category</th>
+                    
+                    <th>Percent</td>
+                    <th>Amount</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Income (Tax)</td>
+                    
+                    <td></td>
+                    <td>{{taxincomesum}}</td>
+                </tr>
+                <tr>
+                    <td>&emsp;Kirchensteuer</td>
+                    
+                    <td>{{KS}}</td>
+                    <td>({{KSA}})</td>
+                    
+                </tr>
+                <tr>
+                    <td>&emsp;Rentenversicherung</td>
+                   
+                    <td>{{RV}}</td>
+                    <td>({{RVA}})</td>
+                    
+                </tr>
+                <tr>
+                    <td>&emsp;Krankenversicherung</td>
+                    
+                    <td>{{KV}}</td>
+                    <td>({{KVA}})</td>
+                    
+                </tr>
+                <tr>
+                    <td>&emsp;Arbeitslosenversicherung</td>
+                    
+                    <td>{{AV}}</td>
+                    <td>({{AVA}})</td>
+                    
+                </tr>
+                <tr>
+                    <td>&emsp;Pflegeversicherung</td>
+                   
+                    <td>{{PV}}</td>
+                    <td>({{PVA}})</td>
+                    
+                </tr>
+                <tr>
+                    <td>&emsp;Summe Abgabgen</td>
+                    
+                    <td></td>
+                    <td>({{SummeAbgaben}})</td>
+                    
+                </tr><tr>
+                    <td>Income post tax</td>
+                   
+                    <td></td>
+                    <td>{{posttax}}</td>
+                    
+                </tr>
+    
+                <tr>
+                    <td>Income (Wihtout Tax)</td>
+                    
+                    <td></td>
+                    <td>{{ntaxincomesum}}</td>
+                </tr>
+                <tr>
+                    <td>Total income (PostTax)</td>
+                    
+                    <td></td>
+                    <td><h2>{{totalincome}}</h2></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width: 60%">Sum Expenses</td>
+                    <td></td>
+                    <td>{{totalexpenses}}</td>
+                </tr>
+                <tr>
+                    <td>Sum Fixed Costs</td>
+                    <td></td>
+                    <td>{{sumfixedcosts}}</td>
+                </tr>
+                <tr>
+                    <td>Savingsplan</td>
+                    <td></td>
+                    <td>{{sparplan}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <table>
+            <tbody>
+                <tr>
+                    <td><h3>Profit</h3></td>
+                    <td></td>
+                    <td>Profit/Loss</td>
+                </tr>
+                <tr>
+                    <td style="width: 60%">&emsp;ohne Sparplan</td>
+                    <td></td>
+                    <td>{{balance}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 60%">&emsp;mit Sparplan</td>
+                    <td></td>
+                    <td><h2>{{balance2}}</h2></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-expenses">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 70%">Category</th>
+                    
+                    <th>Percent</td>
+                    <th>Amount</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in purposelist %}
+                <tr>
+                    <td>{{i.purpose}}</td>
+                    <td>{{i.percent}}</td>
+                    <td>{{i.expense}}</td>
+                </tr>
+                {%endfor%}
+                <tr>
+                    <td>Sum Expenses</td>
+                    <td></td>
+                    <td><h2>{{totalexpenses}}</h2></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 70%">Fixed Cost</th>
+                    <th>Percent</th>
+                    <th>amount</th>
+                </tr>
                 
-            </tr>
-            <tr>
-                <td>&emsp;Rentenversicherung</td>
-                <td></td>
-                <td>{{RV}}</td>
-                <td>({{RVA}})</td>
-                
-            </tr>
-            <tr>
-                <td>&emsp;Krankenversicherung</td>
-                <td></td>
-                <td>{{KV}}</td>
-                <td>({{KVA}})</td>
-                
-            </tr>
-            <tr>
-                <td>&emsp;Arbeitslosenversicherung</td>
-                <td></td>
-                <td>{{AV}}</td>
-                <td>({{AVA}})</td>
-                
-            </tr>
-            <tr>
-                <td>&emsp;Pflegeversicherung</td>
-                <td></td>
-                <td>{{PV}}</td>
-                <td>({{PVA}})</td>
-                
-            </tr>
-            <tr>
-                <td>&emsp;Summe Abgabgen</td>
-                <td></td>
-                <td></td>
-                <td>({{SummeAbgaben}})</td>
-                
-            </tr><tr>
-                <td>Income post tax</td>
-                <td></td>
-                <td></td>
-                <td>{{posttax}}</td>
-                
-            </tr>
-
-            <tr>
-                <td>Income (Wihtout Tax)</td>
-                <td></td>
-                <td></td>
-                <td>{{ntaxincomesum}}</td>
-            </tr>
-            <tr>
-                <td>Total income</td>
-                <td></td>
-                <td></td>
-                <td>{{totalincome}}</td>
-            </tr>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for i in fixedCosts %}
+                <tr>
+                    <td>{{i.purpose}}</td>
+                    <td>{{i.id}}</td>
+                    <td>{{i.amount}}</td>
+                </tr>
+                {%endfor%}
+                <tr>
+                    <td><h2>Sum</h2></td>
+                    <td></td>
+                    <td><h2>{{sumfixedcosts}}</h2></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>
 

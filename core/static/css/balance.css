@@ -1,20 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root{
+ --light-grey: rgb(38,38,38);
+ --medium-grey: rgb(23, 23,23);
+ --dark-grey: rgb(13,13,13);
+
+ --purple-light:rgb(114, 116, 214);
+ --purple-dark:rgb(88, 95, 164);
+
+ --sidebar-width: 200px;
+ --border-radius: 5px;
+ --header-height: 50px;
+ --border-radius: 10px;
+ --border-radius-s:5px;
+}
+
 .body-main{
     width: 100%;
-    height: calc(100vh - 55px);
+    /* height: calc(100vh - 55px); */
     background: var(--medium-grey);
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 }
 .container{
-    height: 90%;
+    /* height: 90%; */
     width: 90%;
     padding: 10px;
-    background-color: grey;
+    background-color: rgb(66, 65, 65);
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: row;
     /* background-color: green; */
+    max-width: 1200px;
+    margin-top: 50px;
 }
 table{
     /* border: 1px solid black; */
@@ -26,6 +54,7 @@ table{
     width: 100%;
     background-color: var(--medium-grey);
     border-collapse: collapse;
+    border: 1px solid black;
 }
 table th{
     height: 40px;   
@@ -53,4 +82,38 @@ table tr:hover{
 }
 table{
     overflow-y: scroll;
+}
+
+.income-table-container{
+    width: 40vw;
+    height: 100%;
+}
+.table-expenses{
+    width: 40vw;
+    height: 100%;
+    background-color: rgb(66, 65, 65);  
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 970px) {
+    .body-main .container{
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    .body-main .container .income-table-container{
+        width: 100%;
+
+    }
+    .body-main .container .table-expenses{
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 50px;
+    }
+    
+}
+
+@media only screen and (max-width: 520px) {
+    table td{
+        font-size: 12px;
+    }
 }

@@ -111,7 +111,7 @@ def tracker(request):
 
     # print(el)
     context={
-        'income':income,
+        'income':incomesum,
         'totalexpenses':totalexpenses,
         'assets':assets,
         'balance':balance,
@@ -191,7 +191,7 @@ def list(request):
     fixedCosts = FixedCost.objects.all()
     for i in range(len(fixedCosts)):
         sumfixedcosts += fixedCosts[i].amount
-    print(sumfixedcosts)
+    # print(sumfixedcosts)
     # Array of days
     days_array=[]    
 
@@ -275,7 +275,7 @@ def balance(request):
     
 
     expenses,income2, month, year = datefilter(request)
-    print(income2)
+    # print(expenses)
 
     # print(year, month)
     if year is not None and month is not None:
@@ -288,15 +288,26 @@ def balance(request):
     
     # print(year, month)
     incomesum=income2.aggregate(Sum('income')).get('income__sum')
-    taxincomesum=taxincome.aggregate(Sum('income')).get('income__sum')
-    ntaxincomesum=ntaxincome.aggregate(Sum('income')).get('income__sum')
+    if taxincome == None:
+        taxincomesum = 0
+    else:
+        taxincomesum=taxincome.aggregate(Sum('income')).get('income__sum')
+    
+    if ntaxincome == None:
+        ntaxincomesum = 0
+    else:
+        ntaxincomesum=ntaxincome.aggregate(Sum('income')).get('income__sum')
     
     #Steuerliche Abgaben STEUERSAETZE
-    if taxincomesum <1300:
+    
+    if taxincomesum == None:
+        taxincomesum =0
+
+    if taxincomesum <1300:  
         LS = 0
     else:
         LS = 15
-
+    # LS =0
     KS=4
     RV=9.3
     KV=8.3
@@ -314,8 +325,6 @@ def balance(request):
 
     posttax = taxincomesum - SummeAbgaben
     
-    print(KSA)
-    print(SummeAbgaben)
     if incomesum == None:
         incomesum = 0
 
@@ -339,12 +348,53 @@ def balance(request):
         sumExpenses+=int(seqs)
     
 
+    #Expenses
+       
+    purposelist = Purpose.objects.all()
+    for purposeitem in purposelist:
+        # purposeitem.expense = expenses.filter(purpose=purposeitem).aggregate(Sum('amount')).get('amount__sum')
+        summeexpenses = expenses.filter(purpose=purposeitem).aggregate(Sum('amount')).get('amount__sum')
+        # None = 0:
+        if summeexpenses == None:
+            summeexpenses = 0
+            purposeitem.expense = summeexpenses
+        else:
+            purposeitem.expense = summeexpenses
+        
+        if sumExpenses == 0:
+            purposeitem.percent = 0
+        else:
+            purposeitem.percent = round(summeexpenses / sumExpenses , 2)
+    
+    # for i in purposelist:
+    #     print('purpose')
+    #     print(i.purpose)
+        
+    #     print('amount')
+    #     print(i.expense)
+    #     print('//')
+
+    #Sum fixed Costs
+    sumfixedcosts=0
+    fixedCosts = FixedCost.objects.all()
+    for i in range(len(fixedCosts)):
+        sumfixedcosts += fixedCosts[i].amount
+    fsumfixedcosts =f"{sumfixedcosts:.2f}"
 
     totalexpenses = sumExpenses 
-    balance = incomesum - totalexpenses
+    ftotalexpenses = f"{totalexpenses:.1f}"
+
+    sparplan = 100
+    fsparplan =f"{sparplan:.2f}"
+
+    profitloss = totalincome - totalexpenses - sumfixedcosts    
+    balance = totalincome - totalexpenses -sumfixedcosts
+    balance2 = balance - sparplan
+    print(balance2)
+
     context={
         
-        'totalexpenses':totalexpenses,
+        'totalexpenses':ftotalexpenses,
         'balance': balance,
         'income':incomesum,
 
@@ -371,6 +421,14 @@ def balance(request):
         'SummeAbgaben':SummeAbgaben,
         'posttax':posttax,
         'totalincome':totalincome,
+
+        'purposelist': purposelist,
+        'fixedCosts':fixedCosts,
+        'sumfixedcosts':sumfixedcosts,
+
+        'sparplan':fsparplan,
+        'balance2':balance2
+
 
     }
     return render(request, 'tracker/balance.html', context)
