@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracker</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    
+    <script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
+</head>
+<body onload="dateFunction()">
+    
+    <div class="sidebar" id="sidebar">
+        
+        <div class="header-sidebar" >
+            <h1>Portfolio</h1>
+            <ion-icon name="menu-outline" id="toggleOff"></ion-icon>
+        </div>
+        <div class="sb_container">            
+            <div class="item time">
+                <h3>date</h3>                
+                <span id="Date_today"></span>               
+            </div>
+            
+            <div class="item">
+                <h3>year</h3>
+                <div class="years">
+                    <a href= '/balance?year=2024&month={{month}}'><button>2024</button></a>
+                    <a href= '/balance?year=2025&month={{month}}'><button>2025</button></a>
+                </div>
+
+            </div>
+            
+            <div class="item">
+                <h3>month</h3>
+                <div class="months">
+                    <a href= '/balance?year={{year}}&month=1'><button class="january">January</button></a>
+                    <a href= '/balance?year={{year}}&month=2'><button class="february">february</button></a>
+                    <a href= '/balance?year={{year}}&month=3'><button class="march">march</button></a>
+                    <a href= '/balance?year={{year}}&month=4'><button class="april">april</button></a>
+                    <a href= '/balance?year={{year}}&month=5'> <button class="may">may</button></a>
+                    <a href= '/balance?year={{year}}&month=6'><button class="june">june</button></a>
+                    <a href= '/balance?year={{year}}&month=7'><button class="july">july</button></a>
+                    <a href= '/balance?year={{year}}&month=8'><button class="august">august</button></a>
+                    <a href= '/balance?year={{year}}&month=9'><button class="september">september</button></a>
+                    <a href= '/balance?year={{year}}&month=10'><button class="ocotober">ocotober</button></a>
+                    <a href= '/balance?year={{year}}&month=11'><button class="november">november</button></a>
+                    <a href= '/balance?year={{year}}&month=12'><button class="december">december</button></a>
+                    
+                </div>
+            </div>
+            
+            <div class="item expenses">
+                <h3>add data</h3>
+                <div class="add_expenses">
+                    <a href="/addexpense">
+                        <button class="noselect">
+                            <span class="text">Add</span>
+                            <span class="icon">
+                                <ion-icon name="add-circle-outline"></ion-icon>
+                            </span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main" id="main">
+        <div class="header-main">
+            
+                <ion-icon name="menu-outline" id="toggleOn" class="hide"></ion-icon>
+            
+                <div class="item">
+                    <a href="/tracker"><h1>income <span>:</span></h1></a>
+                    <h1>
+                        {{income}} $
+                    </h1>
+                </div>
+                <div class="item">
+                    <a href="/list"><h1>total exp <span>:</span></h1></a>
+                    <h1>
+                        {{totalexpenses}} $
+                    </h1>
+                </div>
+                
+                <div class="item">
+                    <a href="/balance"><h1>balance <span>:</span></h1></a>
+                    <h1>
+                         {{balance}} $
+                    </h1>
+                </div>
+                <div class="item">
+                    <a href="/assets"><h1>asstes <span>:</span></h1></a>
+                    <h1>
+                         {{assets}} $
+                    </h1>   
+                </div>
+            
+        </div>
+        <div class="body-main">
+            {% block content%}
+            {% endblock%}
+        </div>
+    </div>
+    <button id="AddExpenseButton">AddExpense</button>
+    <button id="AddIncomeButton">AddIncome</button>
+
+
+    
+    <!-- loader -->
+    
+    <div class="loader">
+        <div class="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+    </div>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script defer src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

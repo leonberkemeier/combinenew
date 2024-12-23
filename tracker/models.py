@@ -45,7 +45,7 @@ class Income(models.Model):
     income = models.IntegerField(default=0, null=False)
     date = models.DateField(null=True, blank=True)
     comment = models.CharField(max_length=100, null=True, blank=True)
-
+    tax =models.BooleanField(default=False)
     def __str__(self) -> str:
         return (str(self.income) + ' ' + str(self.date))   
 

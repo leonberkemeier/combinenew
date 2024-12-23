@@ -1,4 +1,4 @@
-{% extends 'tracker/index.html' %}
+{% extends 'tracker/indexbalance.html' %}
 
 {% load static %}
 
@@ -9,21 +9,78 @@
         <thead>
             <tr>
                 <td>Category</td>
-                <td>Amount</td>
-                <td>Describtion</td>
-                <td>date</td>
-                <td>edit</td>
                 <td>info</td>
+                <td>Percent</td>
+                <td>Amount</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Income</td>
-                <td>23</td>
-                <td>desc</td>
-                <td>date</td>
-                <td>edit</td>
-                <td>info</td>
+                <td>Income (Tax)</td>
+                <td></td>
+                <td></td>
+                <td>{{taxincomesum}}</td>
+            </tr>
+            <tr>
+                <td>&emsp;Kirchensteuer</td>
+                <td></td>
+                <td>{{KS}}</td>
+                <td>({{KSA}})</td>
+                
+            </tr>
+            <tr>
+                <td>&emsp;Rentenversicherung</td>
+                <td></td>
+                <td>{{RV}}</td>
+                <td>({{RVA}})</td>
+                
+            </tr>
+            <tr>
+                <td>&emsp;Krankenversicherung</td>
+                <td></td>
+                <td>{{KV}}</td>
+                <td>({{KVA}})</td>
+                
+            </tr>
+            <tr>
+                <td>&emsp;Arbeitslosenversicherung</td>
+                <td></td>
+                <td>{{AV}}</td>
+                <td>({{AVA}})</td>
+                
+            </tr>
+            <tr>
+                <td>&emsp;Pflegeversicherung</td>
+                <td></td>
+                <td>{{PV}}</td>
+                <td>({{PVA}})</td>
+                
+            </tr>
+            <tr>
+                <td>&emsp;Summe Abgabgen</td>
+                <td></td>
+                <td></td>
+                <td>({{SummeAbgaben}})</td>
+                
+            </tr><tr>
+                <td>Income post tax</td>
+                <td></td>
+                <td></td>
+                <td>{{posttax}}</td>
+                
+            </tr>
+
+            <tr>
+                <td>Income (Wihtout Tax)</td>
+                <td></td>
+                <td></td>
+                <td>{{ntaxincomesum}}</td>
+            </tr>
+            <tr>
+                <td>Total income</td>
+                <td></td>
+                <td></td>
+                <td>{{totalincome}}</td>
             </tr>
         </tbody>
     </table>

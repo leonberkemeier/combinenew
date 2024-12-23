@@ -34,7 +34,10 @@ def tracker(request):
     income = networth.incomeM
 
     incomesum=income2.aggregate(Sum('income')).get('income__sum')
-    income = incomesum
+    # income = incomesum
+    
+    if incomesum == None:
+        incomesum = 0
     
     assets = networth.assets
     rel_balance = networth.balance
@@ -96,7 +99,7 @@ def tracker(request):
     fixedCosts = FixedCost.objects.all()
     for i in range(len(fixedCosts)):
         sumfixedcosts += fixedCosts[i].amount
-    print(sumfixedcosts)
+    # print(sumfixedcosts)
 
     totalexpenses=sumfixedcosts+sumcosts
 
@@ -162,6 +165,10 @@ def list(request):
     expenses, income2, month, year = datefilter(request)
 
     incomesum=income2.aggregate(Sum('income')).get('income__sum')
+    
+    if incomesum == None:
+        incomesum = 0
+
     purposes = Purpose.objects
 
     
@@ -267,12 +274,54 @@ def balance(request):
     
     
 
-    expenses,income, month, year = datefilter(request)
+    expenses,income2, month, year = datefilter(request)
+    print(income2)
 
+    # print(year, month)
     if year is not None and month is not None:
         days = calendar.monthrange(int(year),int(month))[1]
 
+    taxincome=income2.filter(tax=1)
     
+
+    ntaxincome=income2.filter(tax=0)
+    
+    # print(year, month)
+    incomesum=income2.aggregate(Sum('income')).get('income__sum')
+    taxincomesum=taxincome.aggregate(Sum('income')).get('income__sum')
+    ntaxincomesum=ntaxincome.aggregate(Sum('income')).get('income__sum')
+    
+    #Steuerliche Abgaben STEUERSAETZE
+    if taxincomesum <1300:
+        LS = 0
+    else:
+        LS = 15
+
+    KS=4
+    RV=9.3
+    KV=8.3
+    AV=1.3
+    PV=2.3
+
+    #Resultierende Abgaben
+    LSA = round(taxincomesum * LS /100,2)
+    KSA = round(taxincomesum * KS / 100,2)
+    RVA = round(taxincomesum * RV/ 100,2)
+    KVA = round(taxincomesum * KV/100,2)
+    AVA = round(taxincomesum * AV/100,2)
+    PVA = round(taxincomesum * PV/100,2)
+    SummeAbgaben = round(LSA + KSA + RVA + KVA + AVA + PVA,2)
+
+    posttax = taxincomesum - SummeAbgaben
+    
+    print(KSA)
+    print(SummeAbgaben)
+    if incomesum == None:
+        incomesum = 0
+
+
+    totalincome = posttax + ntaxincomesum
+
     # Array of Expenses
     expenses_array = []
 
@@ -289,12 +338,39 @@ def balance(request):
         expenses_array.append(float(seqs))
         sumExpenses+=int(seqs)
     
-    totalexpenses = sumExpenses 
 
+
+    totalexpenses = sumExpenses 
+    balance = incomesum - totalexpenses
     context={
         
         'totalexpenses':totalexpenses,
-        
+        'balance': balance,
+        'income':incomesum,
+
+        'days':days,
+        'year':year,
+        'month':month,
+
+        'ntaxincomesum':ntaxincomesum,
+        'taxincomesum':taxincomesum,
+
+        'LS':LS,
+        'KS':KS,
+        'RV':RV,
+        'KV':KV,
+        'AV':AV,
+        'PV':PV,
+
+        'LSA':LSA,
+        'KSA':KSA,
+        'RVA':RVA,
+        'KVA':KVA,
+        'AVA':AVA,
+        'PVA':PVA,
+        'SummeAbgaben':SummeAbgaben,
+        'posttax':posttax,
+        'totalincome':totalincome,
 
     }
     return render(request, 'tracker/balance.html', context)
