@@ -272,7 +272,6 @@ def list(request):
 @login_required(login_url='login')
 def balance(request):
     
-    
 
     expenses,income2, month, year = datefilter(request)
     # print(expenses)
@@ -381,19 +380,24 @@ def balance(request):
         sumfixedcosts += fixedCosts[i].amount
     fsumfixedcosts =f"{sumfixedcosts:.2f}"
 
+    sumfixedcostsrate =f"{sumfixedcosts/incomesum:.2f}"
+
     sumcosts = sumExpenses
+    sumcostsrate = f"{sumcosts/incomesum:.2f}"
+
 
     totalexpenses=sumfixedcosts+sumcosts
     ftotalexpenses = f"{totalexpenses:.1f}"
 
-    sparplan = 100
+    sparplanrate = 10.00
+    sparplan = incomesum/sparplanrate
     fsparplan =f"{sparplan:.2f}"
 
     profitloss = totalincome - totalexpenses - sumfixedcosts    
     balance = totalincome - sumcosts -sumfixedcosts
     balance2 = balance - sparplan
     print(balance2)
-
+    
     context={
         
         'totalexpenses':ftotalexpenses,
@@ -427,9 +431,12 @@ def balance(request):
         'purposelist': purposelist,
         'fixedCosts':fixedCosts,
         'sumcosts':sumcosts,
+        'sumcostsrate':sumcostsrate,
         'sumfixedcosts':sumfixedcosts,
+        'sumfixedcostsrate':sumfixedcostsrate,
 
         'sparplan':fsparplan,
+        'sparplanrate':sparplanrate,
         'balance2':balance2
 
 
