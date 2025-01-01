@@ -309,7 +309,7 @@ input[type="submit"]{
         background: blue;
     }
 } */
-@media only screen and (min-height: 790px) {
+@media only screen and (max-height: 810px) {
     .body-main .container-bm-first{height: 700px;}
     .body-main .container-bm-second{height: 700px;}
     .body-main .container-bm-third{height: 700px;}

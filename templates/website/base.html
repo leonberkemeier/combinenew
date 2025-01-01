@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alles</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="{% static 'css/website/base.css' %}">
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="nav container">
+           
+            <div class="nav__logo">
+                <a href="#" class="nav__logo1"><h1 data-value="Leon">Leon</h1></a>
+            </div>
+       
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link">
+                            home
+                        </a>
+                    </li>
+                    
+                    <li class="nav__item">
+                        <a href="#projects" class="nav__link">
+                            projects                        
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#skills" class="nav__link">
+                            skills 
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#photography" class="nav__link">
+                            photography                 
+                        </a>
+                    </li>
+                </ul>
+                <div class="nav__buttons">
+                    <a href="#connect" class="nav__button-ghost">Lets Connect</a>
+                </div>
+                <!-- closebtn -->
+                <div class="nav__close" id="nav-close">
+                    <ion-icon name="close-outline"></ion-icon>
+                </div>
+            </div>
+            <!-- toggle btn -->
+            <div class="nav__toggle" id="nav-toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+           
+        </nav>
+
+        
+        
+    </header>
+
+    <section class="home view" id="home">
+   
+        {% include "website/ph.html" %}
+       
+    </section>
+
+    <section class="projects view" id="projects">
+
+        {% include "website/ph.html" %}
+
+    </section>
+
+    <section class="skills views" id="skills">
+        
+        {% include "website/ph.html" %}
+        
+    </section>
+
+    <section class="photography view" id="photography">
+        
+        {% include "website/ph.html" %}
+
+    </section>
+
+    <section class="connect view" id="connect">
+        
+        {% include "website/ph.html" %}
+
+    </section>
+
+    <!-- icons -->
+
+    <div class="icons">
+        <i id="btn-vsco" class="fa fa-vsco"><ion-icon class="button-icon" name="camera-outline"></ion-icon><a class="icon-link" target="_blank" rel="noopener noreferrer" href="https://vsco.co/leonberkemeier/gallery">VSCO</a></i>
+        <i id="btn-insta" class="fa fa-insta"><ion-icon class="button-icon" name="logo-instagram"></ion-icon><a class="icon-link" target="_blank" rel="noopener noreferrer" href="https://instagram.com/leonberkemeier/">Instagram</a></i>
+        <i id="btn-li" class="fa fa-linkedin"><ion-icon class="button-icon" name="logo-linkedin"></ion-icon><a class="icon-link" href="./">LinkedIn</a></i>
+        <i id="btn-gh" class="fa fa-github"><ion-icon class="button-icon" name="logo-github"></ion-icon><a class="icon-link" target="_blank" rel="noopener noreferrer" href="https://github.com/leonberkemeier">GitHub</a></i>
+    </div>
+
+    <!-- loader -->
+    
+    <!-- <div class="loader">
+        <div class="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+    </div> -->
+
+    <!-- footer -->
+    <footer>
+        <div class="footer-col">
+            <h4>Projects</h4>
+            <ul>
+                <li><a href="#">ToDoList</a></li>
+                <li><a href="#">FlashCards</a></li>
+                <li><a href="#">DocumentScanner</a></li>
+                <li><a href="#">WebScraper</a></li>
+
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>network</h4>
+            <ul>
+                <li><a href="#">technology</a></li>
+                <li><a href="#">science</a></li>
+                <li><a href="#">Skills</a></li>
+                <li><a href="#">API</a></li>
+
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Me</h4>
+            <ul>
+                <li><a href="#">about</a></li>
+                <li><a href="#">legal</a></li>
+                <li><a href="#">contact</a></li>
+
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>follow me</h4>
+            <div class="links">
+                <a target="_blank" rel="noopener noreferrer" href="https://vsco.co/leonberkemeier/gallery" target="_blank" rel="noopener noreferrer"><ion-icon name="camera-outline"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/leonberkemeier"><ion-icon name="logo-github"></ion-icon></a>
+                <a target="_blank" rel="noopener noreferrer" href="https://instagram.com/leonberkemeier/"><ion-icon name="logo-instagram"></ion-icon></a>
+            </div>
+            
+        </div>
+    </footer>
+
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script defer src="{% static 'js/website/index.js' %}"></script>
+
+    <!-- scripts for contact -->
+    <!-- <script defer src="script.js"></script> -->
+    <!-- sweet alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- email js link -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+        <script type="text/javascript">
+        emailjs.init('Uc6RlC0v1cy7zI6s5')
+        </script>
+        <script defer src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
