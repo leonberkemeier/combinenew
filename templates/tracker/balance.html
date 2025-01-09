@@ -116,12 +116,12 @@
                 <tr>
                     <td style="width: 60%">&emsp;ohne Sparplan</td>
                     <td></td>
-                    <td>{{balance}}</td>
+                    <td>{{sparplan1}}</td>
                 </tr>
                 <tr>
                     <td style="width: 60%">&emsp;mit Sparplan</td>
                     <td></td>
-                    <td><h2>{{balance2}}</h2></td>
+                    <td><h2>{{nosparplan2}}</h2></td>
                 </tr>
             </tbody>
         </table>
@@ -165,7 +165,7 @@
                 {% for i in fixedCosts %}
                 <tr>
                     <td>{{i.purpose}}</td>
-                    <td>{{i.id}}</td>
+                    <td>{{i.percent}}</td>
                     <td>{{i.amount}}</td>
                 </tr>
                 {%endfor%}

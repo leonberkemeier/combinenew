@@ -23,54 +23,39 @@ from tracker.addeditdelete import *
 
 @login_required(login_url='login')
 def tracker(request):
-    expenses, income2, month, year, taxincome, ntaxincome, taxincomesum, ntaxincomesum = datefilter(request)
-    
+    expenses,expensessum,income, incomesum, month, year, taxincomesum, ntaxincomesum = datefilter(request)
+    posttax, SummeAbgaben,LS,KS,RV,KV,AV,PV,LSA,KSA,RVA,KVA,AVA,PVA=taxrates(request)
     if year is not None and month is not None:
         days = calendar.monthrange(int(year),int(month))[1]
 
     current_time = dt.datetime.now()
     current_day = current_time.day
 
-    networth = Networth.objects.first()
-    networth = 0
-
-    incomesum=income2.aggregate(Sum('income')).get('income__sum')
-    # income = incomesum
-    
-    if incomesum == None:
-        incomesum = 0
-    
-    assets = networth.assets
-    rel_balance = networth.balance
-    avgincome = round(incomesum/days, 2)
+    #Average Income
+    postTaxFixedCosts = posttax-sumfixedcost()
+    avgincome = round(postTaxFixedCosts/days, 2)
     
     # Array of days
     days_array=[]    
-
     for i in range(days):
         days_array.append(i+1)
     
     # Array of Expenses
     expenses_array = []
-
     sumExpens=0
     sumExpenses=round(sumExpens,2)
     
-    
-
-    for i in range(days):
-        
+    for i in range(days):        
         seqs = expenses.filter(date__day = i).aggregate(Sum('amount')).get('amount__sum')
-
         if seqs == None:
             seqs = 0
-
         expenses_array.append(float(seqs))
         sumExpenses+=int(seqs)
     
     totalexpenses = sumExpenses 
 
     average_networth_array = []
+    rel_balance=0
     for i in range(days):
         if i <= current_day:
             rel_balance =round(rel_balance + avgincome - expenses_array[i],2)
@@ -90,35 +75,24 @@ def tracker(request):
             expenses_and_income_pd.append(difday)
         
     pl = purposeList(filter='purpose') 
-    # print(pl)
+
     el = expenseList(expenses)
 
-    sumcosts = sumExpenses
 
-    #Sum fixed Costs
-    
-    sumfixedcosts=0
-    fixedCosts = FixedCost.objects.all()
-    for i in range(len(fixedCosts)):
-        sumfixedcosts += fixedCosts[i].amount
-    # print(sumfixedcosts)
 
-    totalexpenses=sumfixedcosts+sumcosts
 
-    balance = incomesum - totalexpenses
 
 
     addincomeform = IncomeForm(request.POST)
     addexpenseform = ExpensesForm(request.POST)
 
-    # print(el)
     context={
         'income':incomesum,
         'totalexpenses':totalexpenses,
-        'assets':assets,
-        'balance':balance,
+        # 'assets':assets,
+        # 'balance':balance,
 
-        'networth':networth,
+        # 'networth':networth,
 
         'days_array':days_array,
         'expenses_array': expenses_array,
@@ -164,9 +138,8 @@ def list(request):
     # eql = expenseList(expenses)
     # print(eql)
   
-    expenses, income2, month, year, taxincome, ntaxincome, taxincomesum, ntaxincomesum = datefilter(request)
+    expenses,expensessum, income, incomesum, month, year, taxincomesum, ntaxincomesum= datefilter(request)
 
-    incomesum=income2.aggregate(Sum('income')).get('income__sum')
     
     if incomesum == None:
         incomesum = 0
@@ -272,32 +245,9 @@ def list(request):
 @login_required(login_url='login')
 def balance(request):   
 
-    expenses,expensessum, incomesum, month, year, taxincomesum, ntaxincomesum= datefilter(request)
-    print(f"incomesum: {incomesum}")
-    print(f"expensesum: {expensessum}")
+    expenses,expensessum,income, incomesum, month, year, taxincomesum, ntaxincomesum= datefilter(request) 
+    posttax, SummeAbgaben,LS,KS,RV,KV,AV,PV,LSA,KSA,RVA,KVA,AVA,PVA=taxrates(request)
 
-    #Tax-Rates
-    if taxincomesum <1300:  
-        LS = 0
-    else:
-        LS = 15
-    # LS =0
-    KS=f"{4:.2f}"
-    RV=f"{9.3:.2f}"
-    KV=f"{8.3:.2f}"
-    AV=f"{1.3:.2f}"
-    PV=f"{2.3:.2f}"
-
-    #Resulting Tax
-    LSA=f"{incomesum*float(LS) /100:.2f}"
-    KSA=f"{incomesum*float(KS) /100:.2f}"
-    RVA=f"{incomesum*float(RV) /100:.2f}"
-    KVA=f"{incomesum*float(KV) /100:.2f}"
-    AVA=f"{incomesum*float(AV) /100:.2f}"
-    PVA=f"{incomesum*float(PV) /100:.2f}"
-    SummeAbgaben=f"{float(LS)+float(KSA)+float(RVA)+float(KVA)+float(AVA)+float(PVA):.2f}"
-
-    posttax=taxincomesum - float(SummeAbgaben)
     totalincome=posttax+ntaxincomesum
 
     #Expensese
@@ -311,31 +261,38 @@ def balance(request):
             purposeitem.expense = summeexpenses
         else:
             purposeitem.expense = summeexpenses
-            purposeitem.percent = f"{summeexpenses / expensessum*100 :.2f}"
+            purposeitem.percent = f"{summeexpenses / posttax*100 :.2f}"
         sumExpenses+=summeexpenses
-   
-    sumfixedcosts=0
-    fixedCosts = FixedCost.objects.all()
-    for i in range(len(fixedCosts)):
-        sumfixedcosts += fixedCosts[i].amount
     
-    sumfixedcostsrate =f"{sumfixedcosts/incomesum*100:.2f}"
-    sumcostsrate = f"{sumExpenses/incomesum*100:.2f}"
-    totalexpenses=sumfixedcosts+sumExpenses
-    ftotalexpenses = f"{totalexpenses:.1f}"
+    #FixedCosts
+    sumfixedcosts=sumfixedcost() 
+
+    fixedCosts = FixedCost.objects.all()
+    for fixedCost in fixedCosts:
+        fixedCost.percent = f"{fixedCost.amount / posttax*100 :.2f}"
+
+    if incomesum==0:
+        sumfixedcostsrate =0
+        sumcostsrate=0
+    else:
+        sumfixedcostsrate =f"{sumfixedcosts/posttax*100:.2f}"
+        sumcostsrate = f"{sumExpenses/posttax*100:.2f}"
+    
+    #Sparplan
     sparplanrate = f"{10.00:.2f}"
     sparplan = incomesum/float(sparplanrate)
     fsparplan =f"{sparplan:.2f}" 
-    balance = totalincome - sumExpenses -sumfixedcosts
-    balance2 = balance - sparplan
+    sparplan1 = totalincome - sumExpenses -sumfixedcosts
+    nosparplan = sparplan1 - sparplan
 
-    
     context={
         'year':year,
         'month':month,
-        
+
         'ntaxincomesum':ntaxincomesum,
         'taxincomesum':taxincomesum,
+        'incomesum':incomesum,
+        'expensessum':expensessum,
 
         'LS':LS,
         'KS':KS,
@@ -363,8 +320,8 @@ def balance(request):
 
         'sparplan':fsparplan,
         'sparplanrate':sparplanrate,
-        'balance':balance,
-        'balance2':balance2
+        'sparplan1':sparplan,
+        'nosparplan2':nosparplan,
     }
     return render(request, 'tracker/balance.html', context)
 

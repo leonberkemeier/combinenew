@@ -60,8 +60,39 @@ def datefilter(request):
         expensessum = expenses.aggregate(Sum('amount')).get('amount__sum')
     
     
-    return (expenses,expensessum, incomesum, month, year, taxincomesum, ntaxincomesum)
+    return (expenses,expensessum, income, incomesum, month, year, taxincomesum, ntaxincomesum)
 
+def sumfixedcost():
+    sumfixedcosts=0
+    fixedCosts = FixedCost.objects.all()
+    for i in range(len(fixedCosts)):
+        sumfixedcosts += fixedCosts[i].amount
+    return(sumfixedcosts)
+
+def taxrates(request):
+    expenses,expensessum,income, incomesum, month, year, taxincomesum, ntaxincomesum= datefilter(request)
+    if taxincomesum <1300:  
+        LS = 0
+    else:
+        LS = 15
+    # LS =0
+    KS=f"{4:.2f}"
+    RV=f"{9.3:.2f}"
+    KV=f"{8.3:.2f}"
+    AV=f"{1.3:.2f}"
+    PV=f"{2.3:.2f}"
+
+    #Resulting Tax
+    LSA=f"{incomesum*float(LS) /100:.2f}"
+    KSA=f"{incomesum*float(KS) /100:.2f}"
+    RVA=f"{incomesum*float(RV) /100:.2f}"
+    KVA=f"{incomesum*float(KV) /100:.2f}"
+    AVA=f"{incomesum*float(AV) /100:.2f}"
+    PVA=f"{incomesum*float(PV) /100:.2f}"
+    SummeAbgaben=f"{float(LS)+float(KSA)+float(RVA)+float(KVA)+float(AVA)+float(PVA):.2f}"
+
+    posttax=taxincomesum - float(SummeAbgaben)
+    return(posttax, SummeAbgaben,LS,KS,RV,KV,AV,PV,LSA,KSA,RVA,KVA,AVA,PVA)
 
 
 def purposeList(filter):
