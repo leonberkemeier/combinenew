@@ -282,8 +282,8 @@ def balance(request):
     sparplanrate = f"{10.00:.2f}"
     sparplan = incomesum/float(sparplanrate)
     fsparplan =f"{sparplan:.2f}" 
-    sparplan1 = totalincome - sumExpenses -sumfixedcosts
-    nosparplan = sparplan1 - sparplan
+    ohnesparplan = f"{posttax - expensessum -sumfixedcosts:.2f}"
+    mitsparplan = f"{float(ohnesparplan) - sparplan:.2f}"
 
     context={
         'year':year,
@@ -320,8 +320,8 @@ def balance(request):
 
         'sparplan':fsparplan,
         'sparplanrate':sparplanrate,
-        'sparplan1':sparplan,
-        'nosparplan2':nosparplan,
+        'ohnesparplan':ohnesparplan,
+        'mitsparplan':mitsparplan,
     }
     return render(request, 'tracker/balance.html', context)
 
